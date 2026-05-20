@@ -1,0 +1,45 @@
+{
+  "nav": {
+    "home": "Home",
+    "bracket": "Bracket",
+    "pools": "Pools",
+    "profile": "Profile"
+  },
+  "auth": {
+    "title": "CopaTío",
+    "subtitle": "World Cup 2026 · Predictions",
+    "continueWithGoogle": "Continue with Google",
+    "orWithEmail": "or with email",
+    "email": "Email",
+    "password": "Password",
+    "signIn": "Sign in",
+    "signUp": "Create account"
+  },
+  "home": {
+    "greeting": "Hello,",
+    "yourPoints": "Your points",
+    "globalRanking": "Global ranking",
+    "streak": "Hit streak",
+    "accuracy": "Accuracy",
+    "toPredicate": "To predict",
+    "pending": "PENDING",
+    "yourPools": "Your pools",
+    "seeAll": "See all"
+  },
+  "coins": {
+    "label": "coins",
+    "buyMore": "Buy more"
+  },
+  "pools": {
+    "create": "Create pool",
+    "join": "Join",
+    "pot": "Pot",
+    "players": "players",
+    "entryFee": "Entry",
+    "distribution": {
+      "winner": "100% to winner",
+      "top2": "70% / 30%",
+      "top3": "60% / 25% / 15%"
+    }
+  }
+}

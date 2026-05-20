@@ -1,0 +1,45 @@
+{
+  "nav": {
+    "home": "Inicio",
+    "bracket": "Bracket",
+    "pools": "Pools",
+    "profile": "Perfil"
+  },
+  "auth": {
+    "title": "CopaTío",
+    "subtitle": "Mundial 2026 · Predicciones",
+    "continueWithGoogle": "Continuar con Google",
+    "orWithEmail": "o con email",
+    "email": "Email",
+    "password": "Contraseña",
+    "signIn": "Ingresar",
+    "signUp": "Crear cuenta"
+  },
+  "home": {
+    "greeting": "Hola,",
+    "yourPoints": "Tus puntos",
+    "globalRanking": "Ranking global",
+    "streak": "Aciertos seguidos",
+    "accuracy": "Precisión",
+    "toPredicate": "Por pronosticar",
+    "pending": "PENDIENTES",
+    "yourPools": "Tus pools",
+    "seeAll": "Ver todas"
+  },
+  "coins": {
+    "label": "monedas",
+    "buyMore": "Comprar más"
+  },
+  "pools": {
+    "create": "Crear pool",
+    "join": "Unirse",
+    "pot": "Pozo",
+    "players": "jugadores",
+    "entryFee": "Entrada",
+    "distribution": {
+      "winner": "100% al ganador",
+      "top2": "70% / 30%",
+      "top3": "60% / 25% / 15%"
+    }
+  }
+}
