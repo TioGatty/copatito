@@ -74,4 +74,29 @@ create policy "admin update matches" on matches
       select 1 from profiles
       where id = auth.uid() and is_admin = true
     )
+  )
+  with check (
+    exists (
+      select 1 from profiles
+      where id = auth.uid() and is_admin = true
+    )
   );
+
+create policy "own profile update" on profiles
+  for update to authenticated
+  using (auth.uid() = id)
+  with check (
+    is_admin = (select is_admin from profiles where id = auth.uid())
+  );
+
+-- Constraints
+alter table matches add constraint matches_home_score_nonneg check (home_score >= 0 or home_score is null);
+alter table matches add constraint matches_away_score_nonneg check (away_score >= 0 or away_score is null);
+alter table matches add constraint matches_teams_differ check (home_team_id is null or away_team_id is null or home_team_id <> away_team_id);
+
+-- Indexes
+create index on matches (status);
+create index on matches (kickoff_at);
+create index on matches (phase);
+create index on teams (group_id);
+create unique index on matches (api_football_id) where api_football_id is not null;
