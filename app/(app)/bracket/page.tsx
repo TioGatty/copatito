@@ -20,7 +20,7 @@ function MatchCard({ match }: { match: Match }) {
   const away = match.away_team
   const homeName = home ? `${home.flag_emoji} ${home.code}` : match.home_placeholder ?? '?'
   const awayName = away ? `${away.flag_emoji} ${away.code}` : match.away_placeholder ?? '?'
-  const date = new Date(match.kickoff_at).toLocaleDateString('es', {
+  const date = new Date(match.kickoff_at).toLocaleString('es', {
     day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit',
   })
 
@@ -49,7 +49,7 @@ export default async function BracketPage() {
 
   if (error) return <p className="p-6 text-red-400">Error cargando partidos</p>
 
-  const byPhase = (matches as Match[]).reduce<Record<string, Match[]>>((acc, m) => {
+  const byPhase = ((matches ?? []) as Match[]).reduce<Record<string, Match[]>>((acc, m) => {
     acc[m.phase] = acc[m.phase] ?? []
     acc[m.phase].push(m)
     return acc
