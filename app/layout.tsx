@@ -1,4 +1,4 @@
-import type { Metadata } from 'next'
+import type { Metadata, Viewport } from 'next'
 import { Geist } from 'next/font/google'
 import { NextIntlClientProvider } from 'next-intl'
 import { getLocale, getMessages } from 'next-intl/server'
@@ -10,12 +10,15 @@ export const metadata: Metadata = {
   title: 'CopaTío',
   description: 'Predicciones del Mundial 2026',
   manifest: '/manifest.json',
-  themeColor: '#d4a017',
   appleWebApp: {
     capable: true,
     statusBarStyle: 'black-translucent',
     title: 'CopaTío',
   },
+}
+
+export const viewport: Viewport = {
+  themeColor: '#d4a017',
 }
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
