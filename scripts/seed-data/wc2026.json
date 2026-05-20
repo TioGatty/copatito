@@ -1,0 +1,1021 @@
+{
+  "groups": [
+    { "name": "A" },
+    { "name": "B" },
+    { "name": "C" },
+    { "name": "D" },
+    { "name": "E" },
+    { "name": "F" },
+    { "name": "G" },
+    { "name": "H" },
+    { "name": "I" },
+    { "name": "J" },
+    { "name": "K" },
+    { "name": "L" }
+  ],
+  "teams": [
+    { "name": "México",            "code": "MEX", "flag_emoji": "🇲🇽", "group": "A" },
+    { "name": "Sudáfrica",         "code": "RSA", "flag_emoji": "🇿🇦", "group": "A" },
+    { "name": "Corea del Sur",     "code": "KOR", "flag_emoji": "🇰🇷", "group": "A" },
+    { "name": "República Checa",   "code": "CZE", "flag_emoji": "🇨🇿", "group": "A" },
+
+    { "name": "Canadá",            "code": "CAN", "flag_emoji": "🇨🇦", "group": "B" },
+    { "name": "Bosnia-Herzegovina","code": "BIH", "flag_emoji": "🇧🇦", "group": "B" },
+    { "name": "Qatar",             "code": "QAT", "flag_emoji": "🇶🇦", "group": "B" },
+    { "name": "Suiza",             "code": "SUI", "flag_emoji": "🇨🇭", "group": "B" },
+
+    { "name": "Brasil",            "code": "BRA", "flag_emoji": "🇧🇷", "group": "C" },
+    { "name": "Marruecos",         "code": "MAR", "flag_emoji": "🇲🇦", "group": "C" },
+    { "name": "Haití",             "code": "HAI", "flag_emoji": "🇭🇹", "group": "C" },
+    { "name": "Escocia",           "code": "SCO", "flag_emoji": "🏴󠁧󠁢󠁳󠁣󠁴󠁿", "group": "C" },
+
+    { "name": "Estados Unidos",    "code": "USA", "flag_emoji": "🇺🇸", "group": "D" },
+    { "name": "Paraguay",          "code": "PAR", "flag_emoji": "🇵🇾", "group": "D" },
+    { "name": "Australia",         "code": "AUS", "flag_emoji": "🇦🇺", "group": "D" },
+    { "name": "Turquía",           "code": "TUR", "flag_emoji": "🇹🇷", "group": "D" },
+
+    { "name": "Alemania",          "code": "GER", "flag_emoji": "🇩🇪", "group": "E" },
+    { "name": "Curazao",           "code": "CUW", "flag_emoji": "🇨🇼", "group": "E" },
+    { "name": "Costa de Marfil",   "code": "CIV", "flag_emoji": "🇨🇮", "group": "E" },
+    { "name": "Ecuador",           "code": "ECU", "flag_emoji": "🇪🇨", "group": "E" },
+
+    { "name": "Países Bajos",      "code": "NED", "flag_emoji": "🇳🇱", "group": "F" },
+    { "name": "Japón",             "code": "JPN", "flag_emoji": "🇯🇵", "group": "F" },
+    { "name": "Suecia",            "code": "SWE", "flag_emoji": "🇸🇪", "group": "F" },
+    { "name": "Túnez",             "code": "TUN", "flag_emoji": "🇹🇳", "group": "F" },
+
+    { "name": "Bélgica",           "code": "BEL", "flag_emoji": "🇧🇪", "group": "G" },
+    { "name": "Egipto",            "code": "EGY", "flag_emoji": "🇪🇬", "group": "G" },
+    { "name": "Irán",              "code": "IRN", "flag_emoji": "🇮🇷", "group": "G" },
+    { "name": "Nueva Zelanda",     "code": "NZL", "flag_emoji": "🇳🇿", "group": "G" },
+
+    { "name": "España",            "code": "ESP", "flag_emoji": "🇪🇸", "group": "H" },
+    { "name": "Cabo Verde",        "code": "CPV", "flag_emoji": "🇨🇻", "group": "H" },
+    { "name": "Arabia Saudita",    "code": "KSA", "flag_emoji": "🇸🇦", "group": "H" },
+    { "name": "Uruguay",           "code": "URU", "flag_emoji": "🇺🇾", "group": "H" },
+
+    { "name": "Francia",           "code": "FRA", "flag_emoji": "🇫🇷", "group": "I" },
+    { "name": "Senegal",           "code": "SEN", "flag_emoji": "🇸🇳", "group": "I" },
+    { "name": "Irak",              "code": "IRQ", "flag_emoji": "🇮🇶", "group": "I" },
+    { "name": "Noruega",           "code": "NOR", "flag_emoji": "🇳🇴", "group": "I" },
+
+    { "name": "Argentina",         "code": "ARG", "flag_emoji": "🇦🇷", "group": "J" },
+    { "name": "Argelia",           "code": "ALG", "flag_emoji": "🇩🇿", "group": "J" },
+    { "name": "Austria",           "code": "AUT", "flag_emoji": "🇦🇹", "group": "J" },
+    { "name": "Jordania",          "code": "JOR", "flag_emoji": "🇯🇴", "group": "J" },
+
+    { "name": "Portugal",          "code": "POR", "flag_emoji": "🇵🇹", "group": "K" },
+    { "name": "R. D. Congo",       "code": "COD", "flag_emoji": "🇨🇩", "group": "K" },
+    { "name": "Uzbekistán",        "code": "UZB", "flag_emoji": "🇺🇿", "group": "K" },
+    { "name": "Colombia",          "code": "COL", "flag_emoji": "🇨🇴", "group": "K" },
+
+    { "name": "Inglaterra",        "code": "ENG", "flag_emoji": "🏴󠁧󠁢󠁥󠁮󠁧󠁿", "group": "L" },
+    { "name": "Croacia",           "code": "CRO", "flag_emoji": "🇭🇷", "group": "L" },
+    { "name": "Ghana",             "code": "GHA", "flag_emoji": "🇬🇭", "group": "L" },
+    { "name": "Panamá",            "code": "PAN", "flag_emoji": "🇵🇦", "group": "L" }
+  ],
+  "matches": [
+    {
+      "match_number": 1,
+      "phase": "group",
+      "home_code": "MEX",
+      "away_code": "RSA",
+      "venue": "Estadio Azteca",
+      "city": "Ciudad de México",
+      "kickoff_at": "2026-06-11T13:00:00-06:00"
+    },
+    {
+      "match_number": 2,
+      "phase": "group",
+      "home_code": "KOR",
+      "away_code": "CZE",
+      "venue": "Estadio Akron",
+      "city": "Zapopan",
+      "kickoff_at": "2026-06-11T20:00:00-06:00"
+    },
+    {
+      "match_number": 3,
+      "phase": "group",
+      "home_code": "CAN",
+      "away_code": "BIH",
+      "venue": "BMO Field",
+      "city": "Toronto",
+      "kickoff_at": "2026-06-12T15:00:00-04:00"
+    },
+    {
+      "match_number": 4,
+      "phase": "group",
+      "home_code": "USA",
+      "away_code": "PAR",
+      "venue": "SoFi Stadium",
+      "city": "Inglewood",
+      "kickoff_at": "2026-06-12T18:00:00-07:00"
+    },
+    {
+      "match_number": 5,
+      "phase": "group",
+      "home_code": "HAI",
+      "away_code": "SCO",
+      "venue": "Gillette Stadium",
+      "city": "Foxborough",
+      "kickoff_at": "2026-06-13T21:00:00-04:00"
+    },
+    {
+      "match_number": 6,
+      "phase": "group",
+      "home_code": "AUS",
+      "away_code": "TUR",
+      "venue": "BC Place",
+      "city": "Vancouver",
+      "kickoff_at": "2026-06-13T21:00:00-07:00"
+    },
+    {
+      "match_number": 7,
+      "phase": "group",
+      "home_code": "BRA",
+      "away_code": "MAR",
+      "venue": "MetLife Stadium",
+      "city": "East Rutherford",
+      "kickoff_at": "2026-06-13T18:00:00-04:00"
+    },
+    {
+      "match_number": 8,
+      "phase": "group",
+      "home_code": "QAT",
+      "away_code": "SUI",
+      "venue": "Levi's Stadium",
+      "city": "Santa Clara",
+      "kickoff_at": "2026-06-13T12:00:00-07:00"
+    },
+    {
+      "match_number": 9,
+      "phase": "group",
+      "home_code": "CIV",
+      "away_code": "ECU",
+      "venue": "Lincoln Financial Field",
+      "city": "Filadelfia",
+      "kickoff_at": "2026-06-14T19:00:00-04:00"
+    },
+    {
+      "match_number": 10,
+      "phase": "group",
+      "home_code": "GER",
+      "away_code": "CUW",
+      "venue": "NRG Stadium",
+      "city": "Houston",
+      "kickoff_at": "2026-06-14T12:00:00-05:00"
+    },
+    {
+      "match_number": 11,
+      "phase": "group",
+      "home_code": "NED",
+      "away_code": "JPN",
+      "venue": "AT&T Stadium",
+      "city": "Arlington",
+      "kickoff_at": "2026-06-14T15:00:00-05:00"
+    },
+    {
+      "match_number": 12,
+      "phase": "group",
+      "home_code": "SWE",
+      "away_code": "TUN",
+      "venue": "Estadio BBVA",
+      "city": "Guadalupe",
+      "kickoff_at": "2026-06-14T20:00:00-06:00"
+    },
+    {
+      "match_number": 13,
+      "phase": "group",
+      "home_code": "KSA",
+      "away_code": "URU",
+      "venue": "Hard Rock Stadium",
+      "city": "Miami Gardens",
+      "kickoff_at": "2026-06-15T18:00:00-04:00"
+    },
+    {
+      "match_number": 14,
+      "phase": "group",
+      "home_code": "ESP",
+      "away_code": "CPV",
+      "venue": "Mercedes-Benz Stadium",
+      "city": "Atlanta",
+      "kickoff_at": "2026-06-15T12:00:00-04:00"
+    },
+    {
+      "match_number": 15,
+      "phase": "group",
+      "home_code": "IRN",
+      "away_code": "NZL",
+      "venue": "SoFi Stadium",
+      "city": "Inglewood",
+      "kickoff_at": "2026-06-15T18:00:00-07:00"
+    },
+    {
+      "match_number": 16,
+      "phase": "group",
+      "home_code": "BEL",
+      "away_code": "EGY",
+      "venue": "Lumen Field",
+      "city": "Seattle",
+      "kickoff_at": "2026-06-15T12:00:00-07:00"
+    },
+    {
+      "match_number": 17,
+      "phase": "group",
+      "home_code": "FRA",
+      "away_code": "SEN",
+      "venue": "MetLife Stadium",
+      "city": "East Rutherford",
+      "kickoff_at": "2026-06-16T15:00:00-04:00"
+    },
+    {
+      "match_number": 18,
+      "phase": "group",
+      "home_code": "IRQ",
+      "away_code": "NOR",
+      "venue": "Gillette Stadium",
+      "city": "Foxborough",
+      "kickoff_at": "2026-06-16T18:00:00-04:00"
+    },
+    {
+      "match_number": 19,
+      "phase": "group",
+      "home_code": "ARG",
+      "away_code": "ALG",
+      "venue": "Arrowhead Stadium",
+      "city": "Kansas City",
+      "kickoff_at": "2026-06-16T20:00:00-05:00"
+    },
+    {
+      "match_number": 20,
+      "phase": "group",
+      "home_code": "AUT",
+      "away_code": "JOR",
+      "venue": "Levi's Stadium",
+      "city": "Santa Clara",
+      "kickoff_at": "2026-06-16T21:00:00-07:00"
+    },
+    {
+      "match_number": 21,
+      "phase": "group",
+      "home_code": "GHA",
+      "away_code": "PAN",
+      "venue": "BMO Field",
+      "city": "Toronto",
+      "kickoff_at": "2026-06-17T19:00:00-04:00"
+    },
+    {
+      "match_number": 22,
+      "phase": "group",
+      "home_code": "ENG",
+      "away_code": "CRO",
+      "venue": "AT&T Stadium",
+      "city": "Arlington",
+      "kickoff_at": "2026-06-17T15:00:00-05:00"
+    },
+    {
+      "match_number": 23,
+      "phase": "group",
+      "home_code": "POR",
+      "away_code": "COD",
+      "venue": "NRG Stadium",
+      "city": "Houston",
+      "kickoff_at": "2026-06-17T12:00:00-05:00"
+    },
+    {
+      "match_number": 24,
+      "phase": "group",
+      "home_code": "UZB",
+      "away_code": "COL",
+      "venue": "Estadio Azteca",
+      "city": "Ciudad de México",
+      "kickoff_at": "2026-06-17T20:00:00-06:00"
+    },
+    {
+      "match_number": 25,
+      "phase": "group",
+      "home_code": "CZE",
+      "away_code": "RSA",
+      "venue": "Mercedes-Benz Stadium",
+      "city": "Atlanta",
+      "kickoff_at": "2026-06-18T12:00:00-04:00"
+    },
+    {
+      "match_number": 26,
+      "phase": "group",
+      "home_code": "SUI",
+      "away_code": "BIH",
+      "venue": "SoFi Stadium",
+      "city": "Inglewood",
+      "kickoff_at": "2026-06-18T12:00:00-07:00"
+    },
+    {
+      "match_number": 27,
+      "phase": "group",
+      "home_code": "CAN",
+      "away_code": "QAT",
+      "venue": "BC Place",
+      "city": "Vancouver",
+      "kickoff_at": "2026-06-18T15:00:00-07:00"
+    },
+    {
+      "match_number": 28,
+      "phase": "group",
+      "home_code": "MEX",
+      "away_code": "KOR",
+      "venue": "Estadio Akron",
+      "city": "Zapopan",
+      "kickoff_at": "2026-06-18T19:00:00-06:00"
+    },
+    {
+      "match_number": 29,
+      "phase": "group",
+      "home_code": "BRA",
+      "away_code": "HAI",
+      "venue": "Lincoln Financial Field",
+      "city": "Filadelfia",
+      "kickoff_at": "2026-06-19T20:30:00-04:00"
+    },
+    {
+      "match_number": 30,
+      "phase": "group",
+      "home_code": "SCO",
+      "away_code": "MAR",
+      "venue": "Gillette Stadium",
+      "city": "Foxborough",
+      "kickoff_at": "2026-06-19T18:00:00-04:00"
+    },
+    {
+      "match_number": 31,
+      "phase": "group",
+      "home_code": "TUR",
+      "away_code": "PAR",
+      "venue": "Levi's Stadium",
+      "city": "Santa Clara",
+      "kickoff_at": "2026-06-19T20:00:00-07:00"
+    },
+    {
+      "match_number": 32,
+      "phase": "group",
+      "home_code": "USA",
+      "away_code": "AUS",
+      "venue": "Lumen Field",
+      "city": "Seattle",
+      "kickoff_at": "2026-06-19T12:00:00-07:00"
+    },
+    {
+      "match_number": 33,
+      "phase": "group",
+      "home_code": "GER",
+      "away_code": "CIV",
+      "venue": "BMO Field",
+      "city": "Toronto",
+      "kickoff_at": "2026-06-20T16:00:00-04:00"
+    },
+    {
+      "match_number": 34,
+      "phase": "group",
+      "home_code": "ECU",
+      "away_code": "CUW",
+      "venue": "Arrowhead Stadium",
+      "city": "Kansas City",
+      "kickoff_at": "2026-06-20T19:00:00-05:00"
+    },
+    {
+      "match_number": 35,
+      "phase": "group",
+      "home_code": "NED",
+      "away_code": "SWE",
+      "venue": "NRG Stadium",
+      "city": "Houston",
+      "kickoff_at": "2026-06-20T12:00:00-05:00"
+    },
+    {
+      "match_number": 36,
+      "phase": "group",
+      "home_code": "TUN",
+      "away_code": "JPN",
+      "venue": "Estadio BBVA",
+      "city": "Guadalupe",
+      "kickoff_at": "2026-06-20T22:00:00-06:00"
+    },
+    {
+      "match_number": 37,
+      "phase": "group",
+      "home_code": "URU",
+      "away_code": "CPV",
+      "venue": "Hard Rock Stadium",
+      "city": "Miami Gardens",
+      "kickoff_at": "2026-06-21T18:00:00-04:00"
+    },
+    {
+      "match_number": 38,
+      "phase": "group",
+      "home_code": "ESP",
+      "away_code": "KSA",
+      "venue": "Mercedes-Benz Stadium",
+      "city": "Atlanta",
+      "kickoff_at": "2026-06-21T12:00:00-04:00"
+    },
+    {
+      "match_number": 39,
+      "phase": "group",
+      "home_code": "BEL",
+      "away_code": "IRN",
+      "venue": "SoFi Stadium",
+      "city": "Inglewood",
+      "kickoff_at": "2026-06-21T12:00:00-07:00"
+    },
+    {
+      "match_number": 40,
+      "phase": "group",
+      "home_code": "NZL",
+      "away_code": "EGY",
+      "venue": "BC Place",
+      "city": "Vancouver",
+      "kickoff_at": "2026-06-21T18:00:00-07:00"
+    },
+    {
+      "match_number": 41,
+      "phase": "group",
+      "home_code": "NOR",
+      "away_code": "SEN",
+      "venue": "MetLife Stadium",
+      "city": "East Rutherford",
+      "kickoff_at": "2026-06-22T20:00:00-04:00"
+    },
+    {
+      "match_number": 42,
+      "phase": "group",
+      "home_code": "FRA",
+      "away_code": "IRQ",
+      "venue": "Lincoln Financial Field",
+      "city": "Filadelfia",
+      "kickoff_at": "2026-06-22T17:00:00-04:00"
+    },
+    {
+      "match_number": 43,
+      "phase": "group",
+      "home_code": "ARG",
+      "away_code": "AUT",
+      "venue": "AT&T Stadium",
+      "city": "Arlington",
+      "kickoff_at": "2026-06-22T12:00:00-05:00"
+    },
+    {
+      "match_number": 44,
+      "phase": "group",
+      "home_code": "JOR",
+      "away_code": "ALG",
+      "venue": "Levi's Stadium",
+      "city": "Santa Clara",
+      "kickoff_at": "2026-06-22T20:00:00-07:00"
+    },
+    {
+      "match_number": 45,
+      "phase": "group",
+      "home_code": "ENG",
+      "away_code": "GHA",
+      "venue": "Gillette Stadium",
+      "city": "Foxborough",
+      "kickoff_at": "2026-06-23T16:00:00-04:00"
+    },
+    {
+      "match_number": 46,
+      "phase": "group",
+      "home_code": "PAN",
+      "away_code": "CRO",
+      "venue": "BMO Field",
+      "city": "Toronto",
+      "kickoff_at": "2026-06-23T19:00:00-04:00"
+    },
+    {
+      "match_number": 47,
+      "phase": "group",
+      "home_code": "POR",
+      "away_code": "UZB",
+      "venue": "NRG Stadium",
+      "city": "Houston",
+      "kickoff_at": "2026-06-23T12:00:00-05:00"
+    },
+    {
+      "match_number": 48,
+      "phase": "group",
+      "home_code": "COL",
+      "away_code": "COD",
+      "venue": "Estadio Akron",
+      "city": "Zapopan",
+      "kickoff_at": "2026-06-23T20:00:00-06:00"
+    },
+    {
+      "match_number": 49,
+      "phase": "group",
+      "home_code": "SCO",
+      "away_code": "BRA",
+      "venue": "Hard Rock Stadium",
+      "city": "Miami Gardens",
+      "kickoff_at": "2026-06-24T18:00:00-04:00"
+    },
+    {
+      "match_number": 50,
+      "phase": "group",
+      "home_code": "MAR",
+      "away_code": "HAI",
+      "venue": "Mercedes-Benz Stadium",
+      "city": "Atlanta",
+      "kickoff_at": "2026-06-24T18:00:00-04:00"
+    },
+    {
+      "match_number": 51,
+      "phase": "group",
+      "home_code": "SUI",
+      "away_code": "CAN",
+      "venue": "BC Place",
+      "city": "Vancouver",
+      "kickoff_at": "2026-06-24T12:00:00-07:00"
+    },
+    {
+      "match_number": 52,
+      "phase": "group",
+      "home_code": "BIH",
+      "away_code": "QAT",
+      "venue": "Lumen Field",
+      "city": "Seattle",
+      "kickoff_at": "2026-06-24T12:00:00-07:00"
+    },
+    {
+      "match_number": 53,
+      "phase": "group",
+      "home_code": "CZE",
+      "away_code": "MEX",
+      "venue": "Estadio Azteca",
+      "city": "Ciudad de México",
+      "kickoff_at": "2026-06-24T19:00:00-06:00"
+    },
+    {
+      "match_number": 54,
+      "phase": "group",
+      "home_code": "RSA",
+      "away_code": "KOR",
+      "venue": "Estadio BBVA",
+      "city": "Guadalupe",
+      "kickoff_at": "2026-06-24T19:00:00-06:00"
+    },
+    {
+      "match_number": 55,
+      "phase": "group",
+      "home_code": "CUW",
+      "away_code": "CIV",
+      "venue": "Lincoln Financial Field",
+      "city": "Filadelfia",
+      "kickoff_at": "2026-06-25T16:00:00-04:00"
+    },
+    {
+      "match_number": 56,
+      "phase": "group",
+      "home_code": "ECU",
+      "away_code": "GER",
+      "venue": "MetLife Stadium",
+      "city": "East Rutherford",
+      "kickoff_at": "2026-06-25T16:00:00-04:00"
+    },
+    {
+      "match_number": 57,
+      "phase": "group",
+      "home_code": "JPN",
+      "away_code": "SWE",
+      "venue": "AT&T Stadium",
+      "city": "Arlington",
+      "kickoff_at": "2026-06-25T18:00:00-05:00"
+    },
+    {
+      "match_number": 58,
+      "phase": "group",
+      "home_code": "TUN",
+      "away_code": "NED",
+      "venue": "Arrowhead Stadium",
+      "city": "Kansas City",
+      "kickoff_at": "2026-06-25T18:00:00-05:00"
+    },
+    {
+      "match_number": 59,
+      "phase": "group",
+      "home_code": "TUR",
+      "away_code": "USA",
+      "venue": "SoFi Stadium",
+      "city": "Inglewood",
+      "kickoff_at": "2026-06-25T19:00:00-07:00"
+    },
+    {
+      "match_number": 60,
+      "phase": "group",
+      "home_code": "PAR",
+      "away_code": "AUS",
+      "venue": "Levi's Stadium",
+      "city": "Santa Clara",
+      "kickoff_at": "2026-06-25T19:00:00-07:00"
+    },
+    {
+      "match_number": 61,
+      "phase": "group",
+      "home_code": "NOR",
+      "away_code": "FRA",
+      "venue": "Gillette Stadium",
+      "city": "Foxborough",
+      "kickoff_at": "2026-06-26T15:00:00-04:00"
+    },
+    {
+      "match_number": 62,
+      "phase": "group",
+      "home_code": "SEN",
+      "away_code": "IRQ",
+      "venue": "BMO Field",
+      "city": "Toronto",
+      "kickoff_at": "2026-06-26T15:00:00-04:00"
+    },
+    {
+      "match_number": 63,
+      "phase": "group",
+      "home_code": "EGY",
+      "away_code": "IRN",
+      "venue": "Lumen Field",
+      "city": "Seattle",
+      "kickoff_at": "2026-06-26T20:00:00-07:00"
+    },
+    {
+      "match_number": 64,
+      "phase": "group",
+      "home_code": "NZL",
+      "away_code": "BEL",
+      "venue": "BC Place",
+      "city": "Vancouver",
+      "kickoff_at": "2026-06-26T20:00:00-07:00"
+    },
+    {
+      "match_number": 65,
+      "phase": "group",
+      "home_code": "CPV",
+      "away_code": "KSA",
+      "venue": "NRG Stadium",
+      "city": "Houston",
+      "kickoff_at": "2026-06-26T19:00:00-05:00"
+    },
+    {
+      "match_number": 66,
+      "phase": "group",
+      "home_code": "URU",
+      "away_code": "ESP",
+      "venue": "Estadio Akron",
+      "city": "Zapopan",
+      "kickoff_at": "2026-06-26T18:00:00-06:00"
+    },
+    {
+      "match_number": 67,
+      "phase": "group",
+      "home_code": "PAN",
+      "away_code": "ENG",
+      "venue": "MetLife Stadium",
+      "city": "East Rutherford",
+      "kickoff_at": "2026-06-27T17:00:00-04:00"
+    },
+    {
+      "match_number": 68,
+      "phase": "group",
+      "home_code": "CRO",
+      "away_code": "GHA",
+      "venue": "Lincoln Financial Field",
+      "city": "Filadelfia",
+      "kickoff_at": "2026-06-27T17:00:00-04:00"
+    },
+    {
+      "match_number": 69,
+      "phase": "group",
+      "home_code": "ALG",
+      "away_code": "AUT",
+      "venue": "Arrowhead Stadium",
+      "city": "Kansas City",
+      "kickoff_at": "2026-06-27T21:00:00-05:00"
+    },
+    {
+      "match_number": 70,
+      "phase": "group",
+      "home_code": "JOR",
+      "away_code": "ARG",
+      "venue": "AT&T Stadium",
+      "city": "Arlington",
+      "kickoff_at": "2026-06-27T21:00:00-05:00"
+    },
+    {
+      "match_number": 71,
+      "phase": "group",
+      "home_code": "COL",
+      "away_code": "POR",
+      "venue": "Hard Rock Stadium",
+      "city": "Miami Gardens",
+      "kickoff_at": "2026-06-27T19:30:00-04:00"
+    },
+    {
+      "match_number": 72,
+      "phase": "group",
+      "home_code": "COD",
+      "away_code": "UZB",
+      "venue": "Mercedes-Benz Stadium",
+      "city": "Atlanta",
+      "kickoff_at": "2026-06-27T19:30:00-04:00"
+    },
+
+    {
+      "match_number": 73,
+      "phase": "round_of_32",
+      "home_placeholder": "2° Grupo A",
+      "away_placeholder": "2° Grupo B",
+      "venue": "SoFi Stadium",
+      "city": "Inglewood",
+      "kickoff_at": "2026-06-28T12:00:00-07:00"
+    },
+    {
+      "match_number": 74,
+      "phase": "round_of_32",
+      "home_placeholder": "1° Grupo E",
+      "away_placeholder": "3° Grupos A/B/C/D/F",
+      "venue": "Gillette Stadium",
+      "city": "Foxborough",
+      "kickoff_at": "2026-06-29T16:30:00-04:00"
+    },
+    {
+      "match_number": 75,
+      "phase": "round_of_32",
+      "home_placeholder": "1° Grupo F",
+      "away_placeholder": "2° Grupo C",
+      "venue": "Estadio BBVA",
+      "city": "Guadalupe",
+      "kickoff_at": "2026-06-29T19:00:00-06:00"
+    },
+    {
+      "match_number": 76,
+      "phase": "round_of_32",
+      "home_placeholder": "1° Grupo C",
+      "away_placeholder": "2° Grupo F",
+      "venue": "NRG Stadium",
+      "city": "Houston",
+      "kickoff_at": "2026-06-29T12:00:00-05:00"
+    },
+    {
+      "match_number": 77,
+      "phase": "round_of_32",
+      "home_placeholder": "1° Grupo I",
+      "away_placeholder": "3° Grupos C/D/F/G/H",
+      "venue": "MetLife Stadium",
+      "city": "East Rutherford",
+      "kickoff_at": "2026-06-30T17:00:00-04:00"
+    },
+    {
+      "match_number": 78,
+      "phase": "round_of_32",
+      "home_placeholder": "2° Grupo E",
+      "away_placeholder": "2° Grupo I",
+      "venue": "AT&T Stadium",
+      "city": "Arlington",
+      "kickoff_at": "2026-06-30T12:00:00-05:00"
+    },
+    {
+      "match_number": 79,
+      "phase": "round_of_32",
+      "home_placeholder": "1° Grupo A",
+      "away_placeholder": "3° Grupos C/E/F/H/I",
+      "venue": "Estadio Azteca",
+      "city": "Ciudad de México",
+      "kickoff_at": "2026-06-30T19:00:00-06:00"
+    },
+    {
+      "match_number": 80,
+      "phase": "round_of_32",
+      "home_placeholder": "1° Grupo L",
+      "away_placeholder": "3° Grupos E/H/I/J/K",
+      "venue": "Mercedes-Benz Stadium",
+      "city": "Atlanta",
+      "kickoff_at": "2026-07-01T12:00:00-04:00"
+    },
+    {
+      "match_number": 81,
+      "phase": "round_of_32",
+      "home_placeholder": "1° Grupo D",
+      "away_placeholder": "3° Grupos B/E/F/I/J",
+      "venue": "Levi's Stadium",
+      "city": "Santa Clara",
+      "kickoff_at": "2026-07-01T17:00:00-07:00"
+    },
+    {
+      "match_number": 82,
+      "phase": "round_of_32",
+      "home_placeholder": "1° Grupo G",
+      "away_placeholder": "3° Grupos A/E/H/I/J",
+      "venue": "Lumen Field",
+      "city": "Seattle",
+      "kickoff_at": "2026-07-01T13:00:00-07:00"
+    },
+    {
+      "match_number": 83,
+      "phase": "round_of_32",
+      "home_placeholder": "2° Grupo K",
+      "away_placeholder": "2° Grupo L",
+      "venue": "BMO Field",
+      "city": "Toronto",
+      "kickoff_at": "2026-07-02T19:00:00-04:00"
+    },
+    {
+      "match_number": 84,
+      "phase": "round_of_32",
+      "home_placeholder": "1° Grupo H",
+      "away_placeholder": "2° Grupo J",
+      "venue": "SoFi Stadium",
+      "city": "Inglewood",
+      "kickoff_at": "2026-07-02T12:00:00-07:00"
+    },
+    {
+      "match_number": 85,
+      "phase": "round_of_32",
+      "home_placeholder": "1° Grupo B",
+      "away_placeholder": "3° Grupos E/F/G/I/J",
+      "venue": "BC Place",
+      "city": "Vancouver",
+      "kickoff_at": "2026-07-02T20:00:00-07:00"
+    },
+    {
+      "match_number": 86,
+      "phase": "round_of_32",
+      "home_placeholder": "1° Grupo J",
+      "away_placeholder": "2° Grupo H",
+      "venue": "Hard Rock Stadium",
+      "city": "Miami Gardens",
+      "kickoff_at": "2026-07-03T18:00:00-04:00"
+    },
+    {
+      "match_number": 87,
+      "phase": "round_of_32",
+      "home_placeholder": "1° Grupo K",
+      "away_placeholder": "3° Grupos D/E/I/J/L",
+      "venue": "Arrowhead Stadium",
+      "city": "Kansas City",
+      "kickoff_at": "2026-07-03T20:30:00-05:00"
+    },
+    {
+      "match_number": 88,
+      "phase": "round_of_32",
+      "home_placeholder": "2° Grupo D",
+      "away_placeholder": "2° Grupo G",
+      "venue": "AT&T Stadium",
+      "city": "Arlington",
+      "kickoff_at": "2026-07-03T13:00:00-05:00"
+    },
+
+    {
+      "match_number": 89,
+      "phase": "round_of_16",
+      "home_placeholder": "Ganador Partido 74",
+      "away_placeholder": "Ganador Partido 77",
+      "venue": "Lincoln Financial Field",
+      "city": "Filadelfia",
+      "kickoff_at": "2026-07-04T17:00:00-04:00"
+    },
+    {
+      "match_number": 90,
+      "phase": "round_of_16",
+      "home_placeholder": "Ganador Partido 73",
+      "away_placeholder": "Ganador Partido 75",
+      "venue": "NRG Stadium",
+      "city": "Houston",
+      "kickoff_at": "2026-07-04T12:00:00-05:00"
+    },
+    {
+      "match_number": 91,
+      "phase": "round_of_16",
+      "home_placeholder": "Ganador Partido 76",
+      "away_placeholder": "Ganador Partido 78",
+      "venue": "MetLife Stadium",
+      "city": "East Rutherford",
+      "kickoff_at": "2026-07-05T16:00:00-04:00"
+    },
+    {
+      "match_number": 92,
+      "phase": "round_of_16",
+      "home_placeholder": "Ganador Partido 79",
+      "away_placeholder": "Ganador Partido 80",
+      "venue": "Estadio Azteca",
+      "city": "Ciudad de México",
+      "kickoff_at": "2026-07-05T18:00:00-06:00"
+    },
+    {
+      "match_number": 93,
+      "phase": "round_of_16",
+      "home_placeholder": "Ganador Partido 83",
+      "away_placeholder": "Ganador Partido 84",
+      "venue": "AT&T Stadium",
+      "city": "Arlington",
+      "kickoff_at": "2026-07-06T14:00:00-05:00"
+    },
+    {
+      "match_number": 94,
+      "phase": "round_of_16",
+      "home_placeholder": "Ganador Partido 81",
+      "away_placeholder": "Ganador Partido 82",
+      "venue": "Lumen Field",
+      "city": "Seattle",
+      "kickoff_at": "2026-07-06T17:00:00-07:00"
+    },
+    {
+      "match_number": 95,
+      "phase": "round_of_16",
+      "home_placeholder": "Ganador Partido 86",
+      "away_placeholder": "Ganador Partido 88",
+      "venue": "Mercedes-Benz Stadium",
+      "city": "Atlanta",
+      "kickoff_at": "2026-07-07T12:00:00-04:00"
+    },
+    {
+      "match_number": 96,
+      "phase": "round_of_16",
+      "home_placeholder": "Ganador Partido 85",
+      "away_placeholder": "Ganador Partido 87",
+      "venue": "BC Place",
+      "city": "Vancouver",
+      "kickoff_at": "2026-07-07T13:00:00-07:00"
+    },
+
+    {
+      "match_number": 97,
+      "phase": "quarter",
+      "home_placeholder": "Ganador Partido 89",
+      "away_placeholder": "Ganador Partido 90",
+      "venue": "Gillette Stadium",
+      "city": "Foxborough",
+      "kickoff_at": "2026-07-09T16:00:00-04:00"
+    },
+    {
+      "match_number": 98,
+      "phase": "quarter",
+      "home_placeholder": "Ganador Partido 93",
+      "away_placeholder": "Ganador Partido 94",
+      "venue": "SoFi Stadium",
+      "city": "Inglewood",
+      "kickoff_at": "2026-07-10T12:00:00-07:00"
+    },
+    {
+      "match_number": 99,
+      "phase": "quarter",
+      "home_placeholder": "Ganador Partido 91",
+      "away_placeholder": "Ganador Partido 92",
+      "venue": "Hard Rock Stadium",
+      "city": "Miami Gardens",
+      "kickoff_at": "2026-07-11T17:00:00-04:00"
+    },
+    {
+      "match_number": 100,
+      "phase": "quarter",
+      "home_placeholder": "Ganador Partido 95",
+      "away_placeholder": "Ganador Partido 96",
+      "venue": "Arrowhead Stadium",
+      "city": "Kansas City",
+      "kickoff_at": "2026-07-11T20:00:00-05:00"
+    },
+
+    {
+      "match_number": 101,
+      "phase": "semi",
+      "home_placeholder": "Ganador Partido 97",
+      "away_placeholder": "Ganador Partido 98",
+      "venue": "AT&T Stadium",
+      "city": "Arlington",
+      "kickoff_at": "2026-07-14T14:00:00-05:00"
+    },
+    {
+      "match_number": 102,
+      "phase": "semi",
+      "home_placeholder": "Ganador Partido 99",
+      "away_placeholder": "Ganador Partido 100",
+      "venue": "Mercedes-Benz Stadium",
+      "city": "Atlanta",
+      "kickoff_at": "2026-07-15T15:00:00-04:00"
+    },
+
+    {
+      "match_number": 103,
+      "phase": "third_place",
+      "home_placeholder": "Perdedor Partido 101",
+      "away_placeholder": "Perdedor Partido 102",
+      "venue": "Hard Rock Stadium",
+      "city": "Miami Gardens",
+      "kickoff_at": "2026-07-18T17:00:00-04:00"
+    },
+
+    {
+      "match_number": 104,
+      "phase": "final",
+      "home_placeholder": "Ganador Partido 101",
+      "away_placeholder": "Ganador Partido 102",
+      "venue": "MetLife Stadium",
+      "city": "East Rutherford",
+      "kickoff_at": "2026-07-19T15:00:00-04:00"
+    }
+  ]
+}
