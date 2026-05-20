@@ -1,21 +1,37 @@
 import { createClient } from '@/lib/supabase/server'
-import { createAdminClient } from '@/lib/supabase/admin'
 import { revalidatePath } from 'next/cache'
 import type { Match } from '@/lib/types/match'
 
 async function saveScore(formData: FormData) {
   'use server'
+  const { createClient } = await import('@/lib/supabase/server')
+  const { createAdminClient } = await import('@/lib/supabase/admin')
+
+  const supabase = await createClient()
+  const { data: { user } } = await supabase.auth.getUser()
+  if (!user) return
+
+  const { data: profile } = await supabase
+    .from('profiles')
+    .select('is_admin')
+    .eq('id', user.id)
+    .single()
+  if (!profile?.is_admin) return
+
   const matchId = formData.get('matchId') as string
+  if (!matchId || !/^[0-9a-f-]{36}$/.test(matchId)) return
+
   const homeScore = parseInt(formData.get('homeScore') as string)
   const awayScore = parseInt(formData.get('awayScore') as string)
-
-  if (isNaN(homeScore) || isNaN(awayScore)) return
+  if (isNaN(homeScore) || isNaN(awayScore) || homeScore < 0 || awayScore < 0) return
 
   const admin = createAdminClient()
-  await admin
+  const { error } = await admin
     .from('matches')
     .update({ home_score: homeScore, away_score: awayScore, status: 'finished' })
     .eq('id', matchId)
+
+  if (error) throw new Error(`Failed to save score: ${error.message}`)
 
   revalidatePath('/admin/matches')
   revalidatePath('/bracket')
@@ -32,7 +48,7 @@ export default async function AdminMatchesPage() {
   const { data: matches } = await supabase
     .from('matches')
     .select('*, home_team:home_team_id(*), away_team:away_team_id(*)')
-    .or(`kickoff_at.gte.${today.toISOString()},status.eq.live`)
+    .gte('kickoff_at', today.toISOString())
     .lt('kickoff_at', tomorrow.toISOString())
     .order('kickoff_at')
 
