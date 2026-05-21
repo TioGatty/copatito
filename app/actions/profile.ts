@@ -22,7 +22,7 @@ export async function updateDisplayName(name: string): Promise<ProfileResult> {
     .update({ display_name: trimmed })
     .eq('id', user.id)
 
-  if (error) return { ok: false, error: error.message }
+  if (error) { console.error('[profile action]', error); return { ok: false, error: 'db_error' } }
 
   revalidatePath('/profile')
   revalidatePath('/home')
@@ -37,7 +37,7 @@ export async function updateAvatarPreset(preset: number): Promise<ProfileResult>
   const p = Math.floor(preset)
   if (!Number.isFinite(p) || p < 0 || p > 11) return { ok: false, error: 'invalid_preset' }
   const { error } = await supabase.from('profiles').update({ avatar_preset: p }).eq('id', user.id)
-  if (error) return { ok: false, error: error.message }
+  if (error) { console.error('[profile action]', error); return { ok: false, error: 'db_error' } }
   revalidatePath('/profile'); revalidatePath('/home'); revalidatePath('/ranking'); revalidatePath('/pools')
   return { ok: true }
 }
@@ -45,7 +45,12 @@ export async function updateAvatarPreset(preset: number): Promise<ProfileResult>
 export async function setLocale(loc: 'es' | 'en'): Promise<ProfileResult> {
   if (loc !== 'es' && loc !== 'en') return { ok: false, error: 'invalid_locale' }
   const ck = await cookies()
-  ck.set('NEXT_LOCALE', loc, { path: '/', maxAge: 60 * 60 * 24 * 365 })
+  ck.set('NEXT_LOCALE', loc, {
+    path: '/',
+    maxAge: 60 * 60 * 24 * 365,
+    sameSite: 'lax',
+    secure: process.env.NODE_ENV === 'production',
+  })
   const supabase = await createClient()
   const { data: { user } } = await supabase.auth.getUser()
   if (user) {

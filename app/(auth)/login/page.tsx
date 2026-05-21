@@ -25,8 +25,8 @@ export default function LoginPage() {
       setMsg({ kind: 'err', text: 'Completá email y contraseña.' })
       return
     }
-    if (password.length < 6) {
-      setMsg({ kind: 'err', text: 'La contraseña debe tener al menos 6 caracteres.' })
+    if (password.length < 8) {
+      setMsg({ kind: 'err', text: 'La contraseña debe tener al menos 8 caracteres.' })
       return
     }
     start(async () => {
@@ -97,10 +97,10 @@ export default function LoginPage() {
             value={password}
             onChange={e => setPassword(e.target.value)}
             type="password"
-            placeholder="Contraseña (mín 6)"
+            placeholder="Contraseña (mín 8)"
             autoComplete={mode === 'signin' ? 'current-password' : 'new-password'}
             required
-            minLength={6}
+            minLength={8}
             className="bg-[oklch(0.2_0.02_60)] text-white rounded-xl px-4 py-3 outline-none border border-[oklch(0.3_0.02_60)] focus:border-[oklch(0.82_0.16_80)]"
           />
 
@@ -143,6 +143,6 @@ function translate(msg: string): string {
   if (m.includes('user already registered')) return 'Ese email ya tiene cuenta. Probá ingresar.'
   if (m.includes('email not confirmed')) return 'Confirmá tu email antes de ingresar.'
   if (m.includes('rate limit')) return 'Demasiados intentos. Esperá un momento.'
-  if (m.includes('password')) return 'Contraseña inválida (mín 6 caracteres).'
+  if (m.includes('password')) return 'Contraseña inválida (mín 8 caracteres).'
   return msg
 }

@@ -1,3 +1,9 @@
--- Promote cgraells (creator/owner) to admin
+-- Promote the project owner to admin by email (no UUID hardcoded).
+-- Idempotent: if email not found, no-op.
 update profiles set is_admin = true
- where id = '5287de63-5ae3-4445-8d42-9817c501eb27';
+ where id = (select id from auth.users where email = 'cgraells@gmail.com' limit 1)
+   and is_admin = false;
+
+update profiles set is_admin = true
+ where id = (select id from auth.users where email = 'cgraells@hotmail.com' limit 1)
+   and is_admin = false;

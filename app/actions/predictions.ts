@@ -58,7 +58,10 @@ export async function upsertPrediction(input: {
       tiebreaker_winner_id: tiebreaker,
     }, { onConflict: 'user_id,match_id' })
 
-  if (upErr) return { ok: false, error: upErr.message }
+  if (upErr) {
+    console.error('[upsertPrediction]', upErr)
+    return { ok: false, error: 'db_error' }
+  }
 
   revalidatePath('/bracket')
   revalidatePath('/home')

@@ -54,7 +54,7 @@ export async function leavePool(poolId: string): Promise<PoolActionResult<null>>
     .eq('pool_id', poolId)
     .eq('user_id', user.id)
 
-  if (error) return { ok: false, error: error.message }
+  if (error) { console.error('[leavePool]', error); return { ok: false, error: 'db_error' } }
   revalidatePath('/pools')
   return { ok: true, data: null }
 }

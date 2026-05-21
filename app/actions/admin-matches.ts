@@ -37,7 +37,7 @@ export async function saveMatchScore(input: {
     .from('matches')
     .update({ home_score: h, away_score: a, status })
     .eq('id', input.matchId)
-  if (error) return { ok: false, error: error.message }
+  if (error) { console.error('[saveMatchScore]', error); return { ok: false, error: 'db_error' } }
 
   revalidatePath('/admin/matches')
   revalidatePath('/bracket')
