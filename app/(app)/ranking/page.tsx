@@ -48,7 +48,7 @@ export default async function RankingPage() {
         <div style={{ padding: '0 20px 16px' }}>
           <div className="card" style={{
             padding: 16,
-            background: 'linear-gradient(135deg, oklch(0.3 0.05 75) 0%, var(--bg-1) 100%)',
+            background: 'var(--gradient-rank)',
             border: '0.5px solid var(--gold-deep)',
           }}>
             <div style={{ fontSize: 11, color: 'var(--gold)', textTransform: 'uppercase', letterSpacing: '0.06em', fontWeight: 700, marginBottom: 6 }}>
@@ -142,7 +142,7 @@ function Row({ row: r, isMe, divider }: { row: import('@/lib/ranking/fetch').Ran
       display: 'grid', gridTemplateColumns: '36px 1fr 50px 60px',
       gap: 10, alignItems: 'center',
       borderBottom: divider ? '0.5px solid var(--line-soft)' : 'none',
-      background: isMe ? 'oklch(0.3 0.05 75 / 0.3)' : 'transparent',
+      background: isMe ? 'var(--accent-soft)' : 'transparent',
     }}>
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 4 }}>
         {isPodium && <MedalIcon rank={r.rank}/>}

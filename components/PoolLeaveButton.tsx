@@ -23,8 +23,8 @@ export default function PoolLeaveButton({ poolId }: { poolId: string }) {
       disabled={pending}
       style={{
         width: '100%', padding: '12px 16px',
-        background: 'oklch(0.3 0.08 25 / 0.3)',
-        border: '0.5px solid oklch(0.4 0.12 25)',
+        background: 'var(--danger-bg-soft)',
+        border: '0.5px solid var(--danger-border)',
         borderRadius: 12, color: 'var(--lose)',
         fontFamily: 'inherit', fontSize: 13, fontWeight: 700,
         cursor: 'pointer', WebkitTapHighlightColor: 'transparent',

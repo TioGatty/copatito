@@ -210,7 +210,7 @@ export default async function HomePage() {
         <Link href="/bracket" style={{
           display: 'flex', alignItems: 'center', justifyContent: 'space-between',
           padding: '14px 16px', borderRadius: 14,
-          background: 'oklch(0.3 0.05 75)', border: '0.5px solid oklch(0.4 0.1 75)',
+          background: 'var(--accent-soft)', border: '0.5px solid var(--accent-soft-2)',
           textDecoration: 'none',
         }}>
           <div>

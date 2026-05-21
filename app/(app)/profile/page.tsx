@@ -64,7 +64,7 @@ export default async function ProfilePage() {
       <div style={{
         position: 'relative',
         padding: '8px 20px 60px',
-        background: 'radial-gradient(ellipse 80% 60% at 50% 0%, oklch(0.65 0.22 5 / 0.2), transparent 60%), linear-gradient(180deg, oklch(0.2 0.04 60) 0%, var(--bg-0) 100%)',
+        background: 'radial-gradient(ellipse 80% 60% at 50% 0%, oklch(0.65 0.22 5 / 0.2), transparent 60%), var(--gradient-hero)',
         overflow: 'hidden',
       }}>
         <div className="sun-motif" style={{ opacity: 0.4 }}/>
@@ -80,8 +80,8 @@ export default async function ProfilePage() {
               type="submit"
               style={{
                 padding: '6px 14px', borderRadius: 999,
-                background: 'oklch(0.3 0.08 25 / 0.5)',
-                border: '0.5px solid oklch(0.4 0.12 25)',
+                background: 'var(--danger-bg)',
+                border: '0.5px solid var(--danger-border)',
                 color: 'var(--lose)', fontSize: 12, fontWeight: 600,
                 cursor: 'pointer', fontFamily: 'inherit',
               }}
@@ -102,7 +102,7 @@ export default async function ProfilePage() {
           <div style={{ marginTop: 4, fontSize: 13, color: 'var(--t-3)' }}>
             {email}
           </div>
-          <div style={{ marginTop: 10, display: 'inline-flex', alignItems: 'center', gap: 6, padding: '4px 10px', borderRadius: 999, background: 'oklch(0.25 0.06 75 / 0.6)', border: '0.5px solid var(--gold-deep)' }}>
+          <div style={{ marginTop: 10, display: 'inline-flex', alignItems: 'center', gap: 6, padding: '4px 10px', borderRadius: 999, background: 'var(--accent-soft)', border: '0.5px solid var(--gold-deep)' }}>
             <span style={{ color: 'var(--gold)' }}><FlameIcon/></span>
             <span className="mono" style={{ fontSize: 12, fontWeight: 700, color: 'var(--gold)' }}>Mundial 2026</span>
           </div>

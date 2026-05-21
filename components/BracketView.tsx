@@ -251,8 +251,8 @@ function GruposView({
             style={{
               padding: '6px 12px', fontSize: 12, flexShrink: 0,
               borderColor: g.name === selectedGroup ? 'var(--gold)' : 'var(--line)',
-              background: g.name === selectedGroup ? 'oklch(0.3 0.05 75)' : 'var(--bg-2)',
-              color: g.name === selectedGroup ? 'var(--gold)' : 'var(--t-2)',
+              background: g.name === selectedGroup ? 'var(--accent-soft)' : 'var(--bg-2)',
+              color: g.name === selectedGroup ? 'var(--selected-text)' : 'var(--t-2)',
             }}
           >
             Grupo {g.name}
@@ -335,7 +335,7 @@ function FinalView({
       <div style={{
         position: 'relative', padding: 20, borderRadius: 20,
         background: 'radial-gradient(circle at 50% 0%, oklch(0.78 0.16 75 / 0.18), transparent 70%), var(--bg-1)',
-        border: '0.5px solid oklch(0.4 0.1 75)',
+        border: '0.5px solid var(--accent-soft-2)',
       }}>
         {finalMatch ? (
           <BracketMatch match={finalMatch} prediction={predictions[finalMatch.id] ?? null} onTap={onTap}/>

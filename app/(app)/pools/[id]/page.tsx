@@ -60,7 +60,7 @@ export default async function PoolDetailPage({ params }: { params: Promise<{ id:
               gap: 10, alignItems: 'center',
               padding: '12px 14px',
               borderBottom: i < ranking.length - 1 ? '0.5px solid var(--line-soft)' : 'none',
-              background: r.is_me ? 'oklch(0.3 0.05 75 / 0.3)' : 'transparent',
+              background: r.is_me ? 'var(--accent-soft)' : 'transparent',
               textDecoration: 'none', color: 'inherit',
             }}>
               <span className="mono" style={{

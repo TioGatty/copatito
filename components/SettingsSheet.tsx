@@ -43,8 +43,8 @@ export default function SettingsSheet({ initials, currentPreset, currentLocale, 
         aria-label="Ajustes"
         style={{
           padding: '6px 14px', borderRadius: 999,
-          background: 'oklch(0.25 0.02 60 / 0.6)',
-          border: '0.5px solid var(--line-soft)',
+          background: 'var(--bg-2)',
+          border: '0.5px solid var(--line)',
           color: 'var(--t-2)', fontSize: 12, fontWeight: 600,
           cursor: 'pointer', fontFamily: 'inherit',
           display: 'inline-flex', alignItems: 'center', gap: 6,
