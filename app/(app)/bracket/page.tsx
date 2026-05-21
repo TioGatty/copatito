@@ -1,43 +1,10 @@
+export const dynamic = 'force-dynamic'
+
 import { createClient } from '@/lib/supabase/server'
-import type { Match } from '@/lib/types/match'
-
-const PHASE_LABELS: Record<string, string> = {
-  group:       'Fase de Grupos',
-  round_of_32: 'Ronda de 32',
-  round_of_16: 'Octavos de Final',
-  quarter:     'Cuartos de Final',
-  semi:        'Semifinales',
-  third_place: 'Tercer Puesto',
-  final:       'Final',
-}
-
-const PHASE_ORDER = [
-  'group','round_of_32','round_of_16','quarter','semi','third_place','final'
-]
-
-function MatchCard({ match }: { match: Match }) {
-  const home = match.home_team
-  const away = match.away_team
-  const homeName = home ? `${home.flag_emoji} ${home.code}` : match.home_placeholder ?? '?'
-  const awayName = away ? `${away.flag_emoji} ${away.code}` : match.away_placeholder ?? '?'
-  const date = new Date(match.kickoff_at).toLocaleString('es', {
-    day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit',
-  })
-
-  return (
-    <div className="bg-white/5 rounded-xl p-3 flex items-center justify-between gap-2">
-      <span className="text-sm font-medium w-20 text-right truncate">{homeName}</span>
-      <div className="flex items-center gap-1 text-sm font-bold min-w-[3rem] justify-center">
-        {match.status === 'finished' ? (
-          <span>{match.home_score} – {match.away_score}</span>
-        ) : (
-          <span className="text-white/40 text-xs">{date}</span>
-        )}
-      </div>
-      <span className="text-sm font-medium w-20 truncate">{awayName}</span>
-    </div>
-  )
-}
+import type { Match, Team } from '@/lib/types/match'
+import type { Prediction } from '@/lib/types/prediction'
+import BracketView from '@/components/BracketView'
+import { getUserPredictions } from '@/lib/predictions/fetch'
 
 export default async function BracketPage() {
   const supabase = await createClient()
@@ -47,29 +14,51 @@ export default async function BracketPage() {
     .select('*, home_team:home_team_id(*), away_team:away_team_id(*)')
     .order('match_number')
 
-  if (error) return <p className="p-6 text-red-400">Error cargando partidos</p>
+  if (error) {
+    return (
+      <div className="screen-body" style={{ padding: '40px 20px' }}>
+        <p style={{ color: 'var(--lose)' }}>Error cargando partidos: {error.message}</p>
+      </div>
+    )
+  }
 
-  const byPhase = ((matches ?? []) as Match[]).reduce<Record<string, Match[]>>((acc, m) => {
-    acc[m.phase] = acc[m.phase] ?? []
-    acc[m.phase].push(m)
-    return acc
-  }, {})
+  const allMatches = (matches ?? []) as Match[]
 
-  return (
-    <div className="p-4 space-y-6">
-      <h1 className="text-xl font-bold">Mundial 2026</h1>
-      {PHASE_ORDER.filter(p => byPhase[p]?.length).map(phase => (
-        <section key={phase}>
-          <h2 className="text-xs font-semibold text-white/50 uppercase tracking-wider mb-2">
-            {PHASE_LABELS[phase]}
-          </h2>
-          <div className="space-y-2">
-            {byPhase[phase].map(m => (
-              <MatchCard key={m.id} match={m} />
-            ))}
-          </div>
-        </section>
-      ))}
-    </div>
-  )
+  // ─── Build groups structure ─────────────────────────────────
+  // Group matches by their group name (derived from team.group_id)
+  // We need group names — collect unique group IDs from teams
+  const groupMatchesMap = new Map<string, Match[]>()
+
+  for (const m of allMatches) {
+    if (m.phase !== 'group') continue
+    const team = (m.home_team ?? m.away_team) as Team | null
+    if (!team?.group_id) continue
+
+    // Group name will be fetched separately; use group_id as key temporarily
+    if (!groupMatchesMap.has(team.group_id)) {
+      groupMatchesMap.set(team.group_id, [])
+    }
+    groupMatchesMap.get(team.group_id)!.push(m)
+  }
+
+  // Fetch group names
+  const { data: groupRows } = await supabase
+    .from('groups')
+    .select('id, name')
+    .order('name')
+
+  const groupIdToName = new Map((groupRows ?? []).map(g => [g.id, g.name]))
+
+  const groups = Array.from(groupMatchesMap.entries())
+    .map(([groupId, groupMatches]) => ({
+      name: groupIdToName.get(groupId) ?? groupId,
+      matches: groupMatches.sort((a, b) => a.match_number - b.match_number),
+    }))
+    .sort((a, b) => a.name.localeCompare(b.name))
+
+  const predictionsMap = await getUserPredictions(allMatches.map(m => m.id))
+  const predictions: Record<string, Prediction> = {}
+  for (const [k, v] of predictionsMap) predictions[k] = v
+
+  return <BracketView matches={allMatches} groups={groups} predictions={predictions}/>
 }

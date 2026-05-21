@@ -1,26 +1,314 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* ─── Design tokens: DARK (default) ─── */
+:root,
+[data-theme="dark"] {
+  --bg-0: oklch(0.13 0.012 50);
+  --bg-1: oklch(0.17 0.014 50);
+  --bg-2: oklch(0.21 0.015 50);
+  --bg-3: oklch(0.26 0.016 50);
+  --line: oklch(0.32 0.018 50);
+  --line-soft: oklch(0.26 0.014 50 / 0.6);
+
+  --t-1: oklch(0.97 0.008 80);
+  --t-2: oklch(0.78 0.012 70);
+  --t-3: oklch(0.58 0.012 65);
+  --t-4: oklch(0.45 0.012 60);
+
+  --gold: oklch(0.82 0.16 80);
+  --gold-deep: oklch(0.68 0.17 65);
+  --pitch: oklch(0.68 0.16 145);
+  --pitch-deep: oklch(0.5 0.15 148);
+  --magenta: oklch(0.65 0.22 5);
+  --magenta-deep: oklch(0.5 0.2 8);
+  --sky: oklch(0.72 0.13 235);
+  --lose: oklch(0.62 0.2 25);
+
+  --btn-primary-text: oklch(0.18 0.04 60);
+  --pill-green-bg: oklch(0.3 0.1 145);
+  --pill-magenta-bg: oklch(0.3 0.12 5);
+  --pill-gold-bg: oklch(0.3 0.08 75);
+  --highlight-bg: linear-gradient(120deg, oklch(0.22 0.04 70) 0%, var(--bg-1) 60%);
+  --highlight-border: oklch(0.5 0.15 80);
+  --hero-halo: oklch(0.78 0.16 75 / 0.18);
+
+  --sh-1: 0 1px 0 oklch(1 0 0 / 0.04) inset, 0 1px 2px oklch(0 0 0 / 0.4);
+  --sh-2: 0 12px 32px -8px oklch(0 0 0 / 0.6), 0 1px 0 oklch(1 0 0 / 0.04) inset;
+  --card-shadow: none;
+  --nav-bg: oklch(0.13 0.012 50 / 0.92);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* ─── Design tokens: LIGHT ─── */
+[data-theme="light"] {
+  --bg-0: oklch(0.97 0.012 70);
+  --bg-1: oklch(0.995 0.005 80);
+  --bg-2: oklch(0.94 0.014 70);
+  --bg-3: oklch(0.91 0.018 65);
+  --line: oklch(0.84 0.02 60);
+  --line-soft: oklch(0.88 0.015 65 / 0.7);
+
+  --t-1: oklch(0.2 0.025 60);
+  --t-2: oklch(0.38 0.02 60);
+  --t-3: oklch(0.52 0.015 60);
+  --t-4: oklch(0.68 0.012 60);
+
+  --gold: oklch(0.62 0.17 65);
+  --gold-deep: oklch(0.5 0.16 55);
+  --pitch: oklch(0.5 0.15 148);
+  --pitch-deep: oklch(0.4 0.14 148);
+  --magenta: oklch(0.55 0.22 5);
+  --magenta-deep: oklch(0.42 0.2 5);
+  --sky: oklch(0.55 0.13 235);
+  --lose: oklch(0.52 0.2 25);
+
+  --btn-primary-text: oklch(0.99 0.005 80);
+  --pill-green-bg: oklch(0.92 0.07 145);
+  --pill-magenta-bg: oklch(0.94 0.06 5);
+  --pill-gold-bg: oklch(0.94 0.07 80);
+  --highlight-bg: linear-gradient(120deg, oklch(0.95 0.06 75) 0%, var(--bg-1) 60%);
+  --highlight-border: oklch(0.78 0.14 75);
+  --hero-halo: oklch(0.85 0.16 75 / 0.4);
+
+  --sh-1: 0 1px 0 oklch(1 0 0 / 0.04) inset, 0 1px 2px oklch(0 0 0 / 0.15);
+  --sh-2: 0 12px 32px -8px oklch(0 0 0 / 0.12), 0 1px 0 oklch(1 0 0 / 0.04) inset;
+  --card-shadow: 0 2px 8px oklch(0.5 0.04 60 / 0.06);
+  --nav-bg: oklch(0.97 0.012 70 / 0.92);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* ─── Base ─── */
+* { box-sizing: border-box; }
+
+body {
+  font-family: var(--font-manrope, 'Manrope', -apple-system, system-ui, sans-serif);
+  background: var(--bg-0);
+  color: var(--t-1);
+  -webkit-font-smoothing: antialiased;
+  font-feature-settings: 'ss01', 'cv11';
+}
+
+/* ─── Typography helpers ─── */
+.display {
+  font-family: var(--font-bricolage, 'Bricolage Grotesque', -apple-system, system-ui, sans-serif);
+  letter-spacing: -0.02em;
+}
+.mono {
+  font-family: var(--font-jetbrains, 'JetBrains Mono', ui-monospace, monospace);
+  font-feature-settings: 'tnum';
+}
+
+/* ─── App shell ─── */
+.app {
+  width: 100%;
+  max-width: 480px;
+  margin: 0 auto;
+  height: 100dvh;
+  background: var(--bg-0);
+  color: var(--t-1);
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding-top: env(safe-area-inset-top);
+}
+
+@media (min-width: 481px) {
+  .app {
+    border-left: 0.5px solid var(--line-soft);
+    border-right: 0.5px solid var(--line-soft);
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+.screen-body {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-width: none;
+  padding-top: 16px;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-y: contain;
+}
+.screen-body::-webkit-scrollbar { display: none; }
+
+/* ─── Bottom nav ─── */
+.bottom-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  height: calc(64px + env(safe-area-inset-bottom));
+  padding: 8px 12px calc(8px + env(safe-area-inset-bottom));
+  background: var(--nav-bg);
+  backdrop-filter: blur(18px) saturate(140%);
+  -webkit-backdrop-filter: blur(18px) saturate(140%);
+  border-top: 0.5px solid var(--line-soft);
+  position: relative;
+  z-index: 50;
+  flex-shrink: 0;
+}
+.nav-item {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 3px; flex: 1; height: 42px;
+  color: var(--t-3);
+  cursor: pointer; user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  transition: color 0.15s;
+  text-decoration: none;
+}
+.nav-item.active { color: var(--gold); }
+.nav-item .lbl {
+  font-size: 10px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase;
+  font-family: inherit;
+}
+
+/* ─── Cards ─── */
+.card {
+  background: var(--bg-1);
+  border: 0.5px solid var(--line-soft);
+  border-radius: 18px;
+  box-shadow: var(--card-shadow);
+}
+.card-2 {
+  background: var(--bg-2);
+  border: 0.5px solid var(--line);
+  border-radius: 16px;
+  box-shadow: var(--card-shadow);
+}
+
+/* ─── Pill badge ─── */
+.pill {
+  display: inline-flex; align-items: center; gap: 4px;
+  height: 22px; padding: 0 8px;
+  border-radius: 999px;
+  font-size: 11px; font-weight: 700; letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+/* ─── Sun motif ─── */
+.sun-motif {
+  position: absolute; inset: 0; pointer-events: none; opacity: 0.5;
+  background-image:
+    radial-gradient(ellipse 60% 40% at 50% 0%, var(--hero-halo) 0%, transparent 60%),
+    conic-gradient(
+      from 90deg at 50% 0%,
+      transparent 0deg, transparent 80deg,
+      oklch(0.78 0.16 75 / 0.04) 80deg, oklch(0.78 0.16 75 / 0.04) 82deg,
+      transparent 82deg, transparent 90deg,
+      oklch(0.78 0.16 75 / 0.04) 90deg, oklch(0.78 0.16 75 / 0.04) 92deg,
+      transparent 92deg
+    );
+}
+
+/* ─── Buttons ─── */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+  padding: 10px 16px;
+  border-radius: 12px;
+  border: 0.5px solid var(--line);
+  background: var(--bg-2);
+  color: var(--t-1);
+  font-family: inherit; font-size: 14px; font-weight: 600;
+  cursor: pointer; -webkit-tap-highlight-color: transparent;
+}
+.btn-primary {
+  background: var(--gold);
+  color: var(--btn-primary-text);
+  border-color: transparent;
+}
+.btn-ghost { background: transparent; }
+
+/* ─── Score input ─── */
+.score-input {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 36px; height: 36px; border-radius: 10px;
+  background: var(--bg-3); border: 0.5px solid var(--line);
+  color: var(--t-1);
+  font-family: var(--font-jetbrains, 'JetBrains Mono', monospace);
+  font-size: 17px; font-weight: 600; text-align: center; outline: none;
+}
+.score-input.set { background: var(--pill-gold-bg); border-color: var(--gold-deep); color: var(--gold); }
+
+/* ─── Tab strip ─── */
+.tab-strip {
+  display: flex; gap: 4px; padding: 4px;
+  background: var(--bg-1); border-radius: 12px; border: 0.5px solid var(--line-soft);
+  overflow-x: auto; scrollbar-width: none;
+}
+.tab-strip::-webkit-scrollbar { display: none; }
+.tab-strip .tab {
+  flex-shrink: 0; padding: 7px 12px; border-radius: 8px;
+  font-size: 13px; font-weight: 600; color: var(--t-3);
+  cursor: pointer; white-space: nowrap;
+  -webkit-tap-highlight-color: transparent;
+  display: flex; align-items: center; user-select: none;
+}
+.tab-strip .tab.active {
+  background: var(--bg-3); color: var(--t-1); box-shadow: var(--sh-1);
+}
+
+/* ─── Match layout ─── */
+.match {
+  display: grid; grid-template-columns: 1fr auto 1fr;
+  align-items: center; gap: 12px;
+}
+.match-team { display: flex; align-items: center; gap: 10px; min-width: 0; }
+.match-team.away { flex-direction: row-reverse; text-align: right; }
+
+/* ─── Live dot ─── */
+.live-dot {
+  width: 6px; height: 6px; border-radius: 50%; background: var(--lose);
+  animation: pulse-live 1.6s ease-in-out infinite;
+  flex-shrink: 0; display: inline-block;
+}
+@keyframes pulse-live {
+  0%, 100% { box-shadow: 0 0 0 0 oklch(0.62 0.2 25 / 0.6); opacity: 1; }
+  50% { box-shadow: 0 0 0 6px oklch(0.62 0.2 25 / 0); opacity: 0.7; }
+}
+
+/* ─── Streak cells ─── */
+.streak-cell { width: 100%; aspect-ratio: 1; border-radius: 4px; background: var(--bg-3); }
+.streak-cell.hit { background: var(--gold); }
+.streak-cell.hit-partial { background: oklch(0.55 0.12 70); }
+.streak-cell.miss { background: oklch(0.32 0.04 25); }
+
+/* ─── Utilities ─── */
+.no-scroll { scrollbar-width: none; }
+.no-scroll::-webkit-scrollbar { display: none; }
+
+/* ─── Skeleton loaders ─── */
+.skel {
+  background: linear-gradient(
+    90deg,
+    var(--bg-2) 0%,
+    var(--bg-3) 50%,
+    var(--bg-2) 100%
+  );
+  background-size: 200% 100%;
+  animation: skel-shimmer 1.4s ease-in-out infinite;
+  border-radius: 8px;
+}
+@keyframes skel-shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* ─── Empty state ─── */
+.empty {
+  padding: 36px 20px;
+  text-align: center;
+  border-radius: 16px;
+  background: var(--bg-1);
+  border: 0.5px dashed var(--line);
+}
+.empty .icon {
+  width: 56px; height: 56px;
+  margin: 0 auto 14px;
+  border-radius: 16px;
+  background: var(--bg-2);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--t-3);
+}
+.empty .title {
+  font-size: 14px; font-weight: 700; color: var(--t-2); margin-bottom: 4px;
+}
+.empty .desc {
+  font-size: 12px; color: var(--t-3); line-height: 1.5; max-width: 280px; margin: 0 auto;
 }

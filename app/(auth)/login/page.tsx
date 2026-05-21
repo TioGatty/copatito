@@ -1,33 +1,59 @@
 'use client'
 
+import { useState, useTransition } from 'react'
 import { createClient } from '@/lib/supabase/client'
 
 export default function LoginPage() {
   const supabase = createClient()
+  const [mode, setMode] = useState<'signin' | 'signup'>('signin')
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [msg, setMsg] = useState<{ kind: 'err' | 'ok'; text: string } | null>(null)
+  const [pending, start] = useTransition()
 
   async function signInWithGoogle() {
     await supabase.auth.signInWithOAuth({
       provider: 'google',
-      options: {
-        redirectTo: `${window.location.origin}/auth/callback`,
-      },
+      options: { redirectTo: `${window.location.origin}/auth/callback` },
     })
   }
 
-  async function signInWithEmail(formData: FormData) {
-    const email = formData.get('email') as string
-    const password = formData.get('password') as string
-    await supabase.auth.signInWithPassword({ email, password })
-    window.location.href = '/home'
-  }
-
-  async function signUpWithEmail(formData: FormData) {
-    const email = formData.get('email') as string
-    const password = formData.get('password') as string
-    await supabase.auth.signUp({
-      email,
-      password,
-      options: { emailRedirectTo: `${window.location.origin}/auth/callback` },
+  function submit(e: React.FormEvent) {
+    e.preventDefault()
+    setMsg(null)
+    if (!email || !password) {
+      setMsg({ kind: 'err', text: 'Completá email y contraseña.' })
+      return
+    }
+    if (password.length < 6) {
+      setMsg({ kind: 'err', text: 'La contraseña debe tener al menos 6 caracteres.' })
+      return
+    }
+    start(async () => {
+      if (mode === 'signin') {
+        const { error } = await supabase.auth.signInWithPassword({ email, password })
+        if (error) {
+          setMsg({ kind: 'err', text: translate(error.message) })
+          return
+        }
+        window.location.href = '/home'
+      } else {
+        const { data, error } = await supabase.auth.signUp({
+          email,
+          password,
+          options: { emailRedirectTo: `${window.location.origin}/auth/callback` },
+        })
+        if (error) {
+          setMsg({ kind: 'err', text: translate(error.message) })
+          return
+        }
+        // If email confirmation is OFF, user is signed in. If ON, need email click.
+        if (data.session) {
+          window.location.href = '/home'
+        } else {
+          setMsg({ kind: 'ok', text: 'Cuenta creada. Revisá tu email para confirmar.' })
+        }
+      }
     })
   }
 
@@ -55,29 +81,68 @@ export default function LoginPage() {
           <span className="text-[oklch(0.5_0.03_60)] text-xs">o con email</span>
           <div className="flex-1 h-px bg-[oklch(0.25_0.02_60)]" />
         </div>
-        <form action={signInWithEmail} className="flex flex-col gap-3">
+
+        <form onSubmit={submit} className="flex flex-col gap-3">
           <input
-            name="email"
+            value={email}
+            onChange={e => setEmail(e.target.value)}
             type="email"
             placeholder="Email"
+            autoCapitalize="none"
+            autoComplete="email"
             required
             className="bg-[oklch(0.2_0.02_60)] text-white rounded-xl px-4 py-3 outline-none border border-[oklch(0.3_0.02_60)] focus:border-[oklch(0.82_0.16_80)]"
           />
           <input
-            name="password"
+            value={password}
+            onChange={e => setPassword(e.target.value)}
             type="password"
-            placeholder="Contraseña"
+            placeholder="Contraseña (mín 6)"
+            autoComplete={mode === 'signin' ? 'current-password' : 'new-password'}
             required
+            minLength={6}
             className="bg-[oklch(0.2_0.02_60)] text-white rounded-xl px-4 py-3 outline-none border border-[oklch(0.3_0.02_60)] focus:border-[oklch(0.82_0.16_80)]"
           />
+
+          {msg && (
+            <div
+              className={`text-sm px-3 py-2 rounded-lg ${
+                msg.kind === 'err'
+                  ? 'bg-[oklch(0.3_0.1_25_/_0.3)] text-[oklch(0.7_0.18_25)]'
+                  : 'bg-[oklch(0.3_0.1_145_/_0.3)] text-[oklch(0.75_0.15_145)]'
+              }`}
+            >
+              {msg.text}
+            </div>
+          )}
+
           <button
             type="submit"
-            className="bg-[oklch(0.82_0.16_80)] text-[oklch(0.14_0.02_60)] font-bold py-3 rounded-xl"
+            disabled={pending}
+            className="bg-[oklch(0.82_0.16_80)] text-[oklch(0.14_0.02_60)] font-bold py-3 rounded-xl disabled:opacity-60"
           >
-            Ingresar
+            {pending ? '…' : mode === 'signin' ? 'Ingresar' : 'Crear cuenta'}
           </button>
         </form>
+
+        <button
+          type="button"
+          onClick={() => { setMode(mode === 'signin' ? 'signup' : 'signin'); setMsg(null) }}
+          className="w-full mt-4 py-3 rounded-xl bg-[oklch(0.22_0.02_60)] hover:bg-[oklch(0.26_0.02_60)] text-[oklch(0.78_0.05_60)] text-sm font-semibold border border-[oklch(0.3_0.02_60)] cursor-pointer"
+        >
+          {mode === 'signin' ? '¿No tenés cuenta? Crear una' : '¿Ya tenés cuenta? Ingresar'}
+        </button>
       </div>
     </div>
   )
+}
+
+function translate(msg: string): string {
+  const m = msg.toLowerCase()
+  if (m.includes('invalid login credentials')) return 'Email o contraseña incorrectos.'
+  if (m.includes('user already registered')) return 'Ese email ya tiene cuenta. Probá ingresar.'
+  if (m.includes('email not confirmed')) return 'Confirmá tu email antes de ingresar.'
+  if (m.includes('rate limit')) return 'Demasiados intentos. Esperá un momento.'
+  if (m.includes('password')) return 'Contraseña inválida (mín 6 caracteres).'
+  return msg
 }
