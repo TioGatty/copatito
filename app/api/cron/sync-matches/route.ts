@@ -15,6 +15,7 @@
 
 import { NextResponse } from 'next/server'
 import { createAdminClient } from '@/lib/supabase/admin'
+import { authOk } from '@/lib/auth/cron'
 
 export const dynamic = 'force-dynamic'
 
@@ -33,14 +34,6 @@ function mapStatus(s: string | undefined): 'scheduled' | 'live' | 'finished' {
     default:
       return 'scheduled'
   }
-}
-
-function authOk(request: Request): boolean {
-  const headerSecret = request.headers.get('x-cron-secret')
-  const bearer = request.headers.get('authorization') // Vercel cron sends Bearer
-  const expected = process.env.CRON_SECRET
-  if (!expected) return false
-  return headerSecret === expected || bearer === `Bearer ${expected}`
 }
 
 export async function GET(request: Request) {

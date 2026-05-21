@@ -53,13 +53,25 @@ export async function revertMatch(matchId: string): Promise<AdminResult> {
   if (!/^[0-9a-f-]{36}$/i.test(matchId)) return { ok: false, error: 'bad_id' }
 
   const admin = createAdminClient()
-  const { error } = await admin
+
+  // 1. Reverse coin awards BEFORE clearing scores (RPC needs scores to detect exact)
+  const { error: rcErr } = await admin.rpc('reverse_match_coin_awards', { p_match_id: matchId })
+  if (rcErr) {
+    console.error('[revertMatch] reverse_match_coin_awards', rcErr)
+    return { ok: false, error: 'reverse_failed' }
+  }
+
+  // 2. Clear match scores + status
+  const { error: mErr } = await admin
     .from('matches')
     .update({ home_score: null, away_score: null, status: 'scheduled' })
     .eq('id', matchId)
-  if (error) return { ok: false, error: error.message }
+  if (mErr) {
+    console.error('[revertMatch] update match', mErr)
+    return { ok: false, error: 'db_error' }
+  }
 
-  // Also clear computed points on related predictions
+  // 3. Clear computed points on related predictions
   await admin.from('predictions').update({ points: null }).eq('match_id', matchId)
 
   revalidatePath('/admin/matches')

@@ -5,18 +5,11 @@
 
 import { NextResponse } from 'next/server'
 import { createAdminClient } from '@/lib/supabase/admin'
+import { authOk } from '@/lib/auth/cron'
 
 interface ApiFootballFixture {
   fixture: { id: number; date: string }
   teams: { home: { id: number; name: string; code: string | null }; away: { id: number; name: string; code: string | null } }
-}
-
-function authOk(request: Request): boolean {
-  const headerSecret = request.headers.get('x-cron-secret')
-  const bearer = request.headers.get('authorization')
-  const expected = process.env.CRON_SECRET
-  if (!expected) return false
-  return headerSecret === expected || bearer === `Bearer ${expected}`
 }
 
 export async function POST(request: Request) {
