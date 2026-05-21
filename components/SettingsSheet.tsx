@@ -2,6 +2,7 @@
 
 import { useState, useTransition } from 'react'
 import { useRouter } from 'next/navigation'
+import Link from 'next/link'
 import Avatar, { AVATAR_PRESETS } from '@/components/Avatar'
 import { updateAvatarPreset, setLocale, setThemePref } from '@/app/actions/profile'
 
@@ -142,6 +143,20 @@ export default function SettingsSheet({ initials, currentPreset, currentLocale, 
             </Choice>
           </div>
         </Section>
+
+        <Link
+          href="/rules"
+          onClick={() => setOpen(false)}
+          style={{
+            display: 'block', textAlign: 'center', marginTop: 20, marginBottom: 8,
+            padding: '12px 16px', borderRadius: 12,
+            background: 'var(--bg-2)', border: '0.5px solid var(--line-soft)',
+            color: 'var(--gold)', fontSize: 13, fontWeight: 700,
+            textDecoration: 'none',
+          }}
+        >
+          📖 Ver reglas del juego
+        </Link>
 
         <div style={{ marginTop: 8, fontSize: 11, color: 'var(--t-4)', textAlign: 'center' }}>
           Los cambios se guardan en tu cuenta y se sincronizan entre dispositivos.
