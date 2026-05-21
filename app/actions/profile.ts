@@ -60,6 +60,19 @@ export async function setLocale(loc: 'es' | 'en'): Promise<ProfileResult> {
   return { ok: true }
 }
 
+export async function completeOnboarding(): Promise<ProfileResult> {
+  const supabase = await createClient()
+  const { data: { user } } = await supabase.auth.getUser()
+  if (!user) return { ok: false, error: 'no_auth' }
+  const { error } = await supabase
+    .from('profiles')
+    .update({ onboarded: true })
+    .eq('id', user.id)
+  if (error) { console.error('[completeOnboarding]', error); return { ok: false, error: 'db_error' } }
+  revalidatePath('/')
+  return { ok: true }
+}
+
 export async function setThemePref(theme: 'dark' | 'light'): Promise<ProfileResult> {
   if (theme !== 'dark' && theme !== 'light') return { ok: false, error: 'invalid_theme' }
   const supabase = await createClient()
