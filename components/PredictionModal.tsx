@@ -6,6 +6,8 @@ import type { Match, Team } from '@/lib/types/match'
 import type { Prediction } from '@/lib/types/prediction'
 import { getPredictionState, isKnockout, needsTiebreaker, phaseMultiplier } from '@/lib/types/prediction'
 import { upsertPrediction } from '@/app/actions/predictions'
+import Confetti from '@/components/Confetti'
+import { playChime, playSave, playError, playClick } from '@/lib/sound'
 
 interface Props {
   match: Match
@@ -48,6 +50,7 @@ export default function PredictionModal({ match, prediction, onClose }: Props) {
   const [aScore, setAScore] = useState<number>(prediction?.away_score ?? 0)
   const [tieWinner, setTieWinner] = useState<string | null>(prediction?.tiebreaker_winner_id ?? null)
   const [err, setErr] = useState<string | null>(null)
+  const [showConfetti, setShowConfetti] = useState(false)
   const [pending, start] = useTransition()
 
   const state = getPredictionState(match)
@@ -63,6 +66,7 @@ export default function PredictionModal({ match, prediction, onClose }: Props) {
 
   function adjust(side: 'h' | 'a', delta: number) {
     if (!isOpen) return
+    playClick()
     if (side === 'h') setHScore(v => Math.max(0, Math.min(20, v + delta)))
     else setAScore(v => Math.max(0, Math.min(20, v + delta)))
   }
@@ -80,8 +84,8 @@ export default function PredictionModal({ match, prediction, onClose }: Props) {
         awayScore: aScore,
         tiebreakerWinnerId: needsTie ? tieWinner : null,
       })
-      if (!res.ok) setErr(translateError(res.error))
-      else onClose()
+      if (!res.ok) { playError(); setErr(translateError(res.error)) }
+      else { playSave(); onClose() }
     })
   }
 
@@ -89,6 +93,21 @@ export default function PredictionModal({ match, prediction, onClose }: Props) {
     document.body.style.overflow = 'hidden'
     return () => { document.body.style.overflow = '' }
   }, [])
+
+  // Confetti trigger: finished + user predicted exact score, once per match
+  useEffect(() => {
+    if (match.status !== 'finished') return
+    if (!prediction) return
+    if (match.home_score !== prediction.home_score) return
+    if (match.away_score !== prediction.away_score) return
+    const key = `confetti-${match.id}`
+    try {
+      if (localStorage.getItem(key)) return
+      localStorage.setItem(key, '1')
+    } catch {}
+    setShowConfetti(true)
+    playChime()
+  }, [match.id, match.status, match.home_score, match.away_score, prediction])
 
   const mult = phaseMultiplier(match.phase)
 
@@ -259,6 +278,7 @@ export default function PredictionModal({ match, prediction, onClose }: Props) {
         @keyframes fadeIn { from { opacity: 0 } to { opacity: 1 } }
         @keyframes slideUp { from { transform: translateY(100%) } to { transform: translateY(0) } }
       `}</style>
+      <Confetti trigger={showConfetti} onDone={() => setShowConfetti(false)}/>
     </div>
   )
 }
@@ -289,7 +309,7 @@ function TeamScoreColumn({
       }}>{label}</div>
       <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
         <ScoreBtn onClick={() => onAdjust(-1)} disabled={disabled || score === 0}>−</ScoreBtn>
-        <div className="mono" style={{
+        <div className="mono tick" key={score} style={{
           minWidth: 44, height: 44, lineHeight: '44px', textAlign: 'center',
           fontSize: 28, fontWeight: 700, color: 'var(--t-1)',
         }}>{score}</div>

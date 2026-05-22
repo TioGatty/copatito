@@ -310,6 +310,17 @@ body {
   100% { background-position: -200% 0; }
 }
 
+/* ─── Number tick animation (for score inputs +/−) ─── */
+.tick {
+  display: inline-block;
+  animation: tick-pop 0.18s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+@keyframes tick-pop {
+  0%   { transform: scale(1) translateY(0); }
+  50%  { transform: scale(1.18) translateY(-2px); }
+  100% { transform: scale(1) translateY(0); }
+}
+
 /* ─── Empty state ─── */
 .empty {
   padding: 36px 20px;

@@ -6,6 +6,7 @@ import type { Match, Team } from '@/lib/types/match'
 import type { Prediction } from '@/lib/types/prediction'
 import { isKnockout, needsTiebreaker } from '@/lib/types/prediction'
 import { upsertPrediction } from '@/app/actions/predictions'
+import { playClick, playSave, playError } from '@/lib/sound'
 
 type Filter = 'pending' | 'all'
 
@@ -140,14 +141,17 @@ function Row({ match, state, setState }: {
         tiebreakerWinnerId: needsTiebreaker(match, h, a) ? state.tieWinner : null,
       })
       if (r.ok) {
+        playSave()
         setState({ ...state, saving: false, saved: true, dirty: false, err: null })
       } else {
+        playError()
         setState({ ...state, saving: false, saved: false, err: r.error })
       }
     })
   }
 
   function adjust(side: 'h' | 'a', delta: number) {
+    playClick()
     const cur = side === 'h' ? state.home : state.away
     const v = cur === '' ? 0 : Math.max(0, Math.min(20, parseInt(cur, 10) + delta))
     const next = side === 'h'
@@ -270,7 +274,7 @@ function BtnMini({ children, onClick, disabled }: { children: React.ReactNode; o
 
 function Num({ value }: { value: string }) {
   return (
-    <span className="mono" style={{
+    <span className="mono tick" key={value} style={{
       minWidth: 24, height: 32, lineHeight: '32px', textAlign: 'center',
       fontSize: 18, fontWeight: 700, color: 'var(--t-1)',
     }}>{value}</span>

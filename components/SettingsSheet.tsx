@@ -5,6 +5,8 @@ import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import Avatar, { AVATAR_PRESETS } from '@/components/Avatar'
 import { updateAvatarPreset, setLocale, setThemePref } from '@/app/actions/profile'
+import { isSoundEnabled, setSoundEnabled, playClick } from '@/lib/sound'
+import { useEffect } from 'react'
 
 interface Props {
   initials: string
@@ -18,8 +20,17 @@ export default function SettingsSheet({ initials, currentPreset, currentLocale, 
   const [preset, setPreset] = useState(currentPreset)
   const [locale, setLoc] = useState<'es' | 'en'>(currentLocale)
   const [theme, setTheme] = useState<'dark' | 'light'>(currentTheme)
+  const [sound, setSound] = useState(true)
   const [pending, start] = useTransition()
   const router = useRouter()
+
+  useEffect(() => { setSound(isSoundEnabled()) }, [])
+
+  function toggleSound(on: boolean) {
+    setSound(on)
+    setSoundEnabled(on)
+    if (on) playClick()
+  }
 
   function selectPreset(i: number) {
     setPreset(i)
@@ -140,6 +151,18 @@ export default function SettingsSheet({ initials, currentPreset, currentLocale, 
             </Choice>
             <Choice active={theme === 'light'} onClick={() => selectTheme('light')} disabled={pending}>
               ☀️ Claro
+            </Choice>
+          </div>
+        </Section>
+
+        {/* Sound */}
+        <Section label="Sonidos">
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
+            <Choice active={sound} onClick={() => toggleSound(true)} disabled={false}>
+              🔊 Activados
+            </Choice>
+            <Choice active={!sound} onClick={() => toggleSound(false)} disabled={false}>
+              🔇 Apagados
             </Choice>
           </div>
         </Section>
