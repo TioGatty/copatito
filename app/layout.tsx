@@ -22,13 +22,30 @@ const jetbrains = JetBrains_Mono({
 })
 
 export const metadata: Metadata = {
-  title: 'CopaTío',
-  description: 'Predicciones del Mundial 2026',
+  metadataBase: new URL('https://copatio.vercel.app'),
+  title: {
+    default: 'CopaTío — Predicciones del Mundial 2026',
+    template: '%s · CopaTío',
+  },
+  description: 'Pronosticá los 104 partidos del Mundial 2026. Competí con tus amigos en pools privados. 10/6/3 puntos × multiplicador por fase.',
   manifest: '/manifest.json',
   appleWebApp: {
     capable: true,
     statusBarStyle: 'black-translucent',
     title: 'CopaTío',
+  },
+  openGraph: {
+    title: 'CopaTío — Predicciones del Mundial 2026',
+    description: 'Pronosticá cada partido del Mundial 2026 y competí con tus amigos en pools privados.',
+    url: 'https://copatio.vercel.app',
+    siteName: 'CopaTío',
+    locale: 'es_AR',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'CopaTío — Predicciones del Mundial 2026',
+    description: 'Pronosticá cada partido del Mundial 2026. Competí con tus amigos.',
   },
 }
 
