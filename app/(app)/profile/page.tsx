@@ -140,6 +140,37 @@ export default async function ProfilePage() {
         </div>
       </div>
 
+      {/* Invite friends CTA */}
+      <div style={{ padding: '16px 20px 0' }}>
+        <Link href="/invite" className="card" style={{
+          padding: '14px 16px', display: 'flex', alignItems: 'center', gap: 12,
+          textDecoration: 'none', color: 'inherit',
+          background: 'var(--accent-soft)', border: '0.5px solid var(--accent-soft-2)',
+        }}>
+          <div style={{
+            width: 40, height: 40, borderRadius: 12,
+            background: 'var(--gold)', color: 'var(--btn-primary-text)',
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+          }}>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+              <path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2M9 11a4 4 0 100-8 4 4 0 000 8zM22 11l-3-3m0 0l-3 3m3-3v8"
+                stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+          </div>
+          <div style={{ flex: 1, minWidth: 0 }}>
+            <div style={{ fontSize: 14, fontWeight: 700, color: 'var(--selected-text)' }}>
+              Invitá amigos
+            </div>
+            <div style={{ fontSize: 12, color: 'var(--t-2)' }}>
+              +20 monedas para vos y +20 para cada amigo
+            </div>
+          </div>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" style={{ color: 'var(--t-3)', flexShrink: 0 }}>
+            <path d="M9 6l6 6-6 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
+        </Link>
+      </div>
+
       {/* Coins + Pools quick row */}
       <div style={{ padding: '16px 20px 0', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10 }}>
         <Link href="/pools" className="card" style={{

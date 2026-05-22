@@ -64,11 +64,36 @@ export async function completeOnboarding(): Promise<ProfileResult> {
   const supabase = await createClient()
   const { data: { user } } = await supabase.auth.getUser()
   if (!user) return { ok: false, error: 'no_auth' }
+
+  // Mark onboarded
   const { error } = await supabase
     .from('profiles')
     .update({ onboarded: true })
     .eq('id', user.id)
   if (error) { console.error('[completeOnboarding]', error); return { ok: false, error: 'db_error' } }
+
+  // Claim referral if cookie present
+  const ck = await cookies()
+  const refCode = ck.get('ref')?.value
+  if (refCode && /^[A-Z0-9]{6}$/i.test(refCode)) {
+    await supabase.rpc('claim_referral', { p_code: refCode.toUpperCase() })
+    ck.delete('ref')
+  }
+
+  revalidatePath('/')
+  return { ok: true }
+}
+
+export async function claimReferral(code: string): Promise<ProfileResult> {
+  const supabase = await createClient()
+  const { data: { user } } = await supabase.auth.getUser()
+  if (!user) return { ok: false, error: 'no_auth' }
+  const clean = code.trim().toUpperCase()
+  if (!/^[A-Z0-9]{6}$/.test(clean)) return { ok: false, error: 'invalid_code' }
+  const { data, error } = await supabase.rpc('claim_referral', { p_code: clean })
+  if (error) { console.error('[claimReferral]', error); return { ok: false, error: 'db_error' } }
+  const row = Array.isArray(data) ? data[0] : data
+  if (!row?.granted) return { ok: false, error: 'not_granted' }
   revalidatePath('/')
   return { ok: true }
 }
