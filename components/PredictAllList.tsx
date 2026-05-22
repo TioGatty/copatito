@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useTransition, useRef } from 'react'
+import { useState, useTransition } from 'react'
 import Flag, { COUNTRY } from '@/components/Flag'
 import type { Match, Team } from '@/lib/types/match'
 import type { Prediction } from '@/lib/types/prediction'
@@ -110,37 +110,39 @@ function Row({ match, state, setState }: {
   const homeName = home ? (COUNTRY[home.code] ?? home.name) : '?'
   const awayName = away ? (COUNTRY[away.code] ?? away.name) : '?'
   const [pending, start] = useTransition()
-  const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null)
 
   const ko = isKnockout(match.phase)
   const hNum = state.home === '' ? null : parseInt(state.home, 10)
   const aNum = state.away === '' ? null : parseInt(state.away, 10)
   const tieReq = ko && hNum != null && aNum != null && hNum === aNum
 
-  function trySave(next: RowState) {
-    const h = next.home === '' ? null : parseInt(next.home, 10)
-    const a = next.away === '' ? null : parseInt(next.away, 10)
-    if (h == null || a == null) return  // need both
+  function confirm() {
+    const h = hNum
+    const a = aNum
+    if (h == null || a == null) {
+      setState({ ...state, err: 'Completá ambos' })
+      return
+    }
     if (isNaN(h) || isNaN(a) || h < 0 || h > 20 || a < 0 || a > 20) {
-      setState({ ...next, err: '0-20', saving: false })
+      setState({ ...state, err: '0-20', saving: false })
       return
     }
-    if (needsTiebreaker(match, h, a) && !next.tieWinner) {
-      setState({ ...next, err: 'Falta desempate', saving: false })
+    if (needsTiebreaker(match, h, a) && !state.tieWinner) {
+      setState({ ...state, err: 'Elegí quién pasa' })
       return
     }
-    setState({ ...next, saving: true, saved: false, err: null })
+    setState({ ...state, saving: true, saved: false, err: null })
     start(async () => {
       const r = await upsertPrediction({
         matchId: match.id,
         homeScore: h,
         awayScore: a,
-        tiebreakerWinnerId: needsTiebreaker(match, h, a) ? next.tieWinner : null,
+        tiebreakerWinnerId: needsTiebreaker(match, h, a) ? state.tieWinner : null,
       })
       if (r.ok) {
-        setState({ ...next, saving: false, saved: true, dirty: false, err: null })
+        setState({ ...state, saving: false, saved: true, dirty: false, err: null })
       } else {
-        setState({ ...next, saving: false, saved: false, err: r.error })
+        setState({ ...state, saving: false, saved: false, err: r.error })
       }
     })
   }
@@ -149,17 +151,13 @@ function Row({ match, state, setState }: {
     const cur = side === 'h' ? state.home : state.away
     const v = cur === '' ? 0 : Math.max(0, Math.min(20, parseInt(cur, 10) + delta))
     const next = side === 'h'
-      ? { ...state, home: String(v), dirty: true }
-      : { ...state, away: String(v), dirty: true }
+      ? { ...state, home: String(v), dirty: true, saved: false, err: null }
+      : { ...state, away: String(v), dirty: true, saved: false, err: null }
     setState(next)
-    if (debounceRef.current) clearTimeout(debounceRef.current)
-    debounceRef.current = setTimeout(() => trySave(next), 500)
   }
 
   function setTie(uid: string) {
-    const next = { ...state, tieWinner: uid, dirty: true }
-    setState(next)
-    trySave(next)
+    setState({ ...state, tieWinner: uid, dirty: true, saved: false, err: null })
   }
 
   return (
@@ -222,6 +220,31 @@ function Row({ match, state, setState }: {
       {state.err && (
         <div style={{ marginTop: 6, fontSize: 11, color: 'var(--lose)' }}>{state.err}</div>
       )}
+
+      <button
+        onClick={confirm}
+        disabled={pending || state.saving || (!state.dirty && state.saved)}
+        style={{
+          marginTop: 8, width: '100%', padding: '8px 12px', borderRadius: 8,
+          background: state.dirty && !state.saving
+            ? 'var(--gold)'
+            : state.saved
+              ? 'var(--pill-green-bg)'
+              : 'var(--bg-3)',
+          color: state.dirty && !state.saving
+            ? 'var(--btn-primary-text)'
+            : state.saved
+              ? 'var(--pitch-deep)'
+              : 'var(--t-4)',
+          border: 'none', fontFamily: 'inherit', fontSize: 12, fontWeight: 700,
+          cursor: (state.dirty && !state.saving) ? 'pointer' : 'not-allowed',
+          WebkitTapHighlightColor: 'transparent',
+        }}
+      >
+        {state.saving ? 'Guardando…'
+          : state.saved && !state.dirty ? '✓ Guardado'
+          : 'Confirmar'}
+      </button>
     </div>
   )
 }
