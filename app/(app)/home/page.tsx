@@ -14,6 +14,7 @@ import { getCoinBalance } from '@/lib/pools/fetch'
 import { getMyGlobalRank } from '@/lib/ranking/fetch'
 import { getUserActivity } from '@/lib/activity/fetch'
 import ActivityFeed from '@/components/ActivityFeed'
+import InstallBanner from '@/components/InstallBanner'
 
 // ─── Icon helpers (inline SVG) ──────────────────────────────
 function BellIcon() {
@@ -123,6 +124,8 @@ export default async function HomePage() {
 
   return (
     <div className="screen-body">
+      <InstallBanner/>
+
       {/* ─── Hero ─── */}
       <div style={{ position: 'relative', padding: '4px 20px 20px', overflow: 'hidden' }}>
         <div className="sun-motif"/>
