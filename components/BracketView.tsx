@@ -17,6 +17,34 @@ const PHASES = [
   { id: 'final',   label: 'Final',   dbPhase: 'final' },
 ]
 
+type FilterId = 'all' | 'predicted' | 'pending' | 'hit' | 'miss'
+const FILTERS: { id: FilterId; label: string }[] = [
+  { id: 'all',       label: 'Todos' },
+  { id: 'pending',   label: 'Sin pronosticar' },
+  { id: 'predicted', label: 'Pronosticados' },
+  { id: 'hit',       label: 'Acertados' },
+  { id: 'miss',      label: 'Fallados' },
+]
+
+function matchPassesFilter(
+  m: Match,
+  filter: FilterId,
+  predictions: Record<string, Prediction>,
+): boolean {
+  const pred = predictions[m.id]
+  switch (filter) {
+    case 'all':       return true
+    case 'predicted': return pred != null
+    case 'pending':
+      return pred == null
+        && m.status === 'scheduled'
+        && getPredictionState(m) === 'open'
+        && !!m.home_team_id && !!m.away_team_id
+    case 'hit':       return (pred?.points ?? 0) > 0
+    case 'miss':      return m.status === 'finished' && pred != null && (pred.points ?? 0) === 0
+  }
+}
+
 // ─── BracketMatch card ──────────────────────────────────────
 function BracketMatch({
   match, prediction, onTap,
@@ -229,14 +257,16 @@ interface GroupData {
 }
 
 function GruposView({
-  groups, predictions, onTap,
+  groups, predictions, filter, onTap,
 }: {
   groups: GroupData[]
   predictions: Record<string, Prediction>
+  filter: FilterId
   onTap: (m: Match) => void
 }) {
   const [selectedGroup, setSelectedGroup] = useState(groups[0]?.name ?? 'A')
   const group = groups.find(g => g.name === selectedGroup) ?? groups[0]
+  const filteredMatches = group ? group.matches.filter(m => matchPassesFilter(m, filter, predictions)) : []
 
   return (
     <div style={{ padding: '8px 20px' }}>
@@ -262,9 +292,13 @@ function GruposView({
 
       {group && (
         <>
-          <GroupStandings matches={group.matches}/>
+          {filter === 'all' && <GroupStandings matches={group.matches}/>}
           <div style={{ marginTop: 14, display: 'flex', flexDirection: 'column', gap: 8 }}>
-            {group.matches.map(m => (
+            {filteredMatches.length === 0 ? (
+              <div style={{ padding: '20px 0', textAlign: 'center', color: 'var(--t-3)', fontSize: 13 }}>
+                No hay partidos en este filtro.
+              </div>
+            ) : filteredMatches.map(m => (
               <BracketMatch key={m.id} match={m} prediction={predictions[m.id] ?? null} onTap={onTap}/>
             ))}
           </div>
@@ -275,13 +309,15 @@ function GruposView({
 }
 
 function KnockoutView({
-  matches, phaseLabel, predictions, onTap,
+  matches, phaseLabel, predictions, filter, onTap,
 }: {
   matches: Match[]
   phaseLabel: string
   predictions: Record<string, Prediction>
+  filter: FilterId
   onTap: (m: Match) => void
 }) {
+  const filtered = matches.filter(m => matchPassesFilter(m, filter, predictions))
   if (matches.length === 0) {
     return (
       <div style={{ padding: '16px 20px' }}>
@@ -303,7 +339,11 @@ function KnockoutView({
         {phaseLabel}
       </div>
       <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
-        {matches.map(m => (
+        {filtered.length === 0 ? (
+          <div style={{ padding: '20px 0', textAlign: 'center', color: 'var(--t-3)', fontSize: 13 }}>
+            No hay partidos en este filtro.
+          </div>
+        ) : filtered.map(m => (
           <BracketMatch key={m.id} match={m} prediction={predictions[m.id] ?? null} onTap={onTap}/>
         ))}
       </div>
@@ -364,6 +404,7 @@ interface BracketViewProps {
 
 export default function BracketView({ matches, groups, predictions }: BracketViewProps) {
   const [phaseId, setPhaseId] = useState('grupos')
+  const [filter, setFilter] = useState<FilterId>('all')
   const [activeMatchId, setActiveMatchId] = useState<string | null>(null)
   const activeMatch = matches.find(m => m.id === activeMatchId) ?? null
 
@@ -415,11 +456,34 @@ export default function BracketView({ matches, groups, predictions }: BracketVie
         </div>
       </div>
 
-      {phaseId === 'grupos' && <GruposView groups={groups} predictions={predictions} onTap={openModal}/>}
-      {phaseId === '16vos' && <KnockoutView matches={matchesByPhase('round_of_32')} phaseLabel="16avos de Final" predictions={predictions} onTap={openModal}/>}
-      {phaseId === '8vos' && <KnockoutView matches={matchesByPhase('round_of_16')} phaseLabel="Octavos de Final" predictions={predictions} onTap={openModal}/>}
-      {phaseId === '4tos' && <KnockoutView matches={matchesByPhase('quarter')} phaseLabel="Cuartos de Final" predictions={predictions} onTap={openModal}/>}
-      {phaseId === 'semis' && <KnockoutView matches={matchesByPhase('semi')} phaseLabel="Semifinales" predictions={predictions} onTap={openModal}/>}
+      {/* Filter chips */}
+      <div style={{
+        padding: '12px 16px 0', display: 'flex', gap: 6,
+        overflowX: 'auto', scrollbarWidth: 'none',
+      }}>
+        {FILTERS.map(f => (
+          <button
+            key={f.id}
+            onClick={() => setFilter(f.id)}
+            style={{
+              flexShrink: 0, padding: '6px 12px', borderRadius: 999,
+              background: filter === f.id ? 'var(--gold)' : 'var(--bg-2)',
+              color: filter === f.id ? 'var(--btn-primary-text)' : 'var(--t-2)',
+              border: `0.5px solid ${filter === f.id ? 'var(--gold)' : 'var(--line-soft)'}`,
+              fontSize: 12, fontWeight: 700, fontFamily: 'inherit',
+              cursor: 'pointer', WebkitTapHighlightColor: 'transparent',
+            }}
+          >
+            {f.label}
+          </button>
+        ))}
+      </div>
+
+      {phaseId === 'grupos' && <GruposView groups={groups} predictions={predictions} filter={filter} onTap={openModal}/>}
+      {phaseId === '16vos' && <KnockoutView matches={matchesByPhase('round_of_32')} phaseLabel="16avos de Final" predictions={predictions} filter={filter} onTap={openModal}/>}
+      {phaseId === '8vos' && <KnockoutView matches={matchesByPhase('round_of_16')} phaseLabel="Octavos de Final" predictions={predictions} filter={filter} onTap={openModal}/>}
+      {phaseId === '4tos' && <KnockoutView matches={matchesByPhase('quarter')} phaseLabel="Cuartos de Final" predictions={predictions} filter={filter} onTap={openModal}/>}
+      {phaseId === 'semis' && <KnockoutView matches={matchesByPhase('semi')} phaseLabel="Semifinales" predictions={predictions} filter={filter} onTap={openModal}/>}
       {phaseId === 'final' && <FinalView matches={[...matchesByPhase('final'), ...matchesByPhase('third_place')]} predictions={predictions} onTap={openModal}/>}
 
       <div style={{ height: 16 }}/>
