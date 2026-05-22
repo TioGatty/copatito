@@ -192,6 +192,33 @@ export default async function HomePage() {
         </>
       )}
 
+      {/* ─── Rapid predict CTA ─── */}
+      <div style={{ padding: '12px 20px 4px' }}>
+        <Link href="/predict-all" className="card" style={{
+          padding: '14px 16px', display: 'flex', alignItems: 'center', gap: 12,
+          textDecoration: 'none', color: 'inherit',
+          background: 'var(--accent-soft)', border: '0.5px solid var(--accent-soft-2)',
+        }}>
+          <div style={{
+            width: 38, height: 38, borderRadius: 12,
+            background: 'var(--gold)', color: 'var(--btn-primary-text)',
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+            fontSize: 20,
+          }}>⚡</div>
+          <div style={{ flex: 1, minWidth: 0 }}>
+            <div style={{ fontSize: 14, fontWeight: 700, color: 'var(--selected-text)' }}>
+              Pronosticar rápido
+            </div>
+            <div style={{ fontSize: 12, color: 'var(--t-2)' }}>
+              Lista compacta para llenar muchos partidos seguidos
+            </div>
+          </div>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" style={{ color: 'var(--t-3)', flexShrink: 0 }}>
+            <path d="M9 6l6 6-6 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
+        </Link>
+      </div>
+
       {/* ─── Upcoming predictions ─── */}
       <div style={{ padding: '12px 20px 4px', display: 'flex', alignItems: 'baseline', justifyContent: 'space-between' }}>
         <h2 className="display" style={{ fontSize: 22, fontWeight: 700, margin: 0 }}>Próximos partidos</h2>
