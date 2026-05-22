@@ -9,6 +9,7 @@ import MyPredictionsList, { type PredictionWithMatch } from '@/components/MyPred
 import EditNameButton from '@/components/EditNameButton'
 import Avatar from '@/components/Avatar'
 import SettingsSheet from '@/components/SettingsSheet'
+import StatsCharts from '@/components/StatsCharts'
 
 function FlameIcon() {
   return (
@@ -211,6 +212,16 @@ export default async function ProfilePage() {
           </div>
         </Link>
       </div>
+
+      {/* Stats charts (only if at least one finished prediction) */}
+      {scored.length > 0 && (
+        <div style={{ padding: '20px 20px 0' }}>
+          <h2 className="display" style={{ fontSize: 20, fontWeight: 700, margin: '0 0 12px' }}>
+            Tus estadísticas
+          </h2>
+          <StatsCharts predictions={predictions}/>
+        </div>
+      )}
 
       {/* My predictions */}
       <div style={{ padding: '20px 20px 8px' }}>
