@@ -10,6 +10,8 @@ import EditNameButton from '@/components/EditNameButton'
 import Avatar from '@/components/Avatar'
 import SettingsSheet from '@/components/SettingsSheet'
 import StatsCharts from '@/components/StatsCharts'
+import AchievementsGrid from '@/components/AchievementsGrid'
+import { getUserAchievements } from '@/lib/achievements/fetch'
 
 function FlameIcon() {
   return (
@@ -47,10 +49,11 @@ export default async function ProfilePage() {
   const locale = (profile?.locale as 'es' | 'en' | null) ?? 'es'
   const themePref = (profile?.theme_pref as 'dark' | 'light' | null) ?? 'dark'
 
-  const [totalPoints, rawPreds, myRank] = await Promise.all([
+  const [totalPoints, rawPreds, myRank, unlocks] = await Promise.all([
     getUserTotalPoints(),
     getAllUserPredictionsWithMatch(),
     getMyGlobalRank(),
+    getUserAchievements(),
   ])
   const predictions = rawPreds as unknown as PredictionWithMatch[]
 
@@ -222,6 +225,11 @@ export default async function ProfilePage() {
           <StatsCharts predictions={predictions}/>
         </div>
       )}
+
+      {/* Achievements */}
+      <div style={{ padding: '20px 20px 0' }}>
+        <AchievementsGrid unlocks={unlocks}/>
+      </div>
 
       {/* My predictions */}
       <div style={{ padding: '20px 20px 8px' }}>

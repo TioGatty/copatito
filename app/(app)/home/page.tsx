@@ -12,6 +12,8 @@ import Avatar from '@/components/Avatar'
 import { getUserPredictions, getUserTotalPoints } from '@/lib/predictions/fetch'
 import { getCoinBalance } from '@/lib/pools/fetch'
 import { getMyGlobalRank } from '@/lib/ranking/fetch'
+import { getUserActivity } from '@/lib/activity/fetch'
+import ActivityFeed from '@/components/ActivityFeed'
 
 // ─── Icon helpers (inline SVG) ──────────────────────────────
 function BellIcon() {
@@ -107,6 +109,7 @@ export default async function HomePage() {
   const totalPoints = await getUserTotalPoints()
   const coins = await getCoinBalance()
   const myRank = await getMyGlobalRank()
+  const activity = await getUserActivity(8)
 
   // Profile (display_name, avatar)
   const { data: profile } = await supabase
@@ -231,6 +234,20 @@ export default async function HomePage() {
       <div style={{ padding: '8px 20px', display: 'flex', flexDirection: 'column', gap: 10 }}>
         <HomePendingList upcoming={upcoming} predictions={predictions}/>
       </div>
+
+      {/* ─── Activity feed ─── */}
+      {activity.length > 0 && (
+        <>
+          <div style={{ padding: '12px 20px 4px' }}>
+            <h2 className="display" style={{ fontSize: 22, fontWeight: 700, margin: 0 }}>
+              Actividad reciente
+            </h2>
+          </div>
+          <div style={{ padding: '8px 20px' }}>
+            <ActivityFeed items={activity}/>
+          </div>
+        </>
+      )}
 
       {/* ─── Quick link to bracket ─── */}
       <div style={{ padding: '8px 20px 16px' }}>
