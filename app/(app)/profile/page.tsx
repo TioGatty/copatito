@@ -37,7 +37,7 @@ export default async function ProfilePage() {
   // Profile row
   const { data: profile } = await supabase
     .from('profiles')
-    .select('display_name, coins, avatar_preset, locale, theme_pref')
+    .select('display_name, coins, avatar_preset, locale, theme_pref, referral_code')
     .eq('id', user?.id ?? '')
     .single()
 
@@ -48,6 +48,7 @@ export default async function ProfilePage() {
   const avatarPreset = (profile?.avatar_preset as number | null) ?? 0
   const locale = (profile?.locale as 'es' | 'en' | null) ?? 'es'
   const themePref = (profile?.theme_pref as 'dark' | 'light' | null) ?? 'dark'
+  const referralCode = (profile?.referral_code as string | null) ?? ''
 
   const [totalPoints, rawPreds, myRank, unlocks] = await Promise.all([
     getUserTotalPoints(),
@@ -106,9 +107,22 @@ export default async function ProfilePage() {
           <div style={{ marginTop: 4, fontSize: 13, color: 'var(--t-3)' }}>
             {email}
           </div>
-          <div style={{ marginTop: 10, display: 'inline-flex', alignItems: 'center', gap: 6, padding: '4px 10px', borderRadius: 999, background: 'var(--accent-soft)', border: '0.5px solid var(--gold-deep)' }}>
-            <span style={{ color: 'var(--gold)' }}><FlameIcon/></span>
-            <span className="mono" style={{ fontSize: 12, fontWeight: 700, color: 'var(--gold)' }}>Mundial 2026</span>
+          <div style={{ marginTop: 10, display: 'inline-flex', alignItems: 'center', gap: 8 }}>
+            <div style={{ display: 'inline-flex', alignItems: 'center', gap: 6, padding: '4px 10px', borderRadius: 999, background: 'var(--accent-soft)', border: '0.5px solid var(--gold-deep)' }}>
+              <span style={{ color: 'var(--gold)' }}><FlameIcon/></span>
+              <span className="mono" style={{ fontSize: 12, fontWeight: 700, color: 'var(--gold)' }}>Mundial 2026</span>
+            </div>
+            {referralCode && (
+              <Link href={`/u/${referralCode}`} style={{
+                display: 'inline-flex', alignItems: 'center', gap: 4,
+                padding: '4px 10px', borderRadius: 999,
+                background: 'var(--bg-2)', border: '0.5px solid var(--line-soft)',
+                color: 'var(--t-2)', fontSize: 11, fontWeight: 600,
+                textDecoration: 'none',
+              }}>
+                Ver perfil público →
+              </Link>
+            )}
           </div>
         </div>
       </div>
