@@ -7,12 +7,14 @@ export default function PublicProfileShare({ code, name }: { code: string; name:
   const link = typeof window !== 'undefined' ? `${window.location.origin}/u/${code}` : `/u/${code}`
 
   async function share() {
+    if (typeof navigator === 'undefined') return
     const text = `Mirá las predicciones de ${name} en CopaTío Mundial 2026: ${link}`
-    if (typeof navigator !== 'undefined' && 'share' in navigator) {
-      try { await (navigator as Navigator).share({ title: `${name} · CopaTío`, text, url: link }) } catch {}
+    const nav = navigator as Navigator
+    if ('share' in nav) {
+      try { await nav.share({ title: `${name} · CopaTío`, text, url: link }) } catch {}
     } else {
       try {
-        await navigator.clipboard.writeText(link)
+        await nav.clipboard.writeText(link)
         setCopied(true)
         setTimeout(() => setCopied(false), 1500)
       } catch {}
