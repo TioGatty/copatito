@@ -3,6 +3,7 @@ export const dynamic = 'force-dynamic'
 import { createClient } from '@/lib/supabase/server'
 import type { Match } from '@/lib/types/match'
 import AdminMatchesGrid from '@/components/AdminMatchesGrid'
+import Link from 'next/link'
 
 export default async function AdminMatchesPage() {
   const supabase = await createClient()
@@ -16,7 +17,12 @@ export default async function AdminMatchesPage() {
 
   return (
     <div className="space-y-3">
-      <h1 className="text-xl font-bold">Cargar resultados</h1>
+      <div className="flex items-center justify-between">
+        <h1 className="text-xl font-bold">Cargar resultados</h1>
+        <Link href="/admin/stats" className="text-xs text-yellow-400 underline">
+          → Dashboard
+        </Link>
+      </div>
       <AdminMatchesGrid matches={all}/>
     </div>
   )
