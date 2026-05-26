@@ -9,12 +9,12 @@ export default function PublicProfileShare({ code, name }: { code: string; name:
   async function share() {
     if (typeof navigator === 'undefined') return
     const text = `Mirá las predicciones de ${name} en CopaTío Mundial 2026: ${link}`
-    const nav = navigator as Navigator
-    if ('share' in nav) {
-      try { await nav.share({ title: `${name} · CopaTío`, text, url: link }) } catch {}
+    const canShare = typeof (navigator as Navigator).share === 'function'
+    if (canShare) {
+      try { await (navigator as Navigator).share({ title: `${name} · CopaTío`, text, url: link }) } catch {}
     } else {
       try {
-        await nav.clipboard.writeText(link)
+        await (navigator as Navigator).clipboard.writeText(link)
         setCopied(true)
         setTimeout(() => setCopied(false), 1500)
       } catch {}
